@@ -1,0 +1,460 @@
+:root {
+  color-scheme: dark;
+  font-family: 'EB Garamond', Georgia, serif;
+  color: #f4ead6;
+  background: #020711;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-width: 320px;
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  min-height: 100svh;
+  overflow: hidden;
+  background: #020711;
+}
+
+button {
+  font: inherit;
+}
+
+.experience {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  height: 100svh;
+  min-height: 560px;
+  overflow: hidden;
+  color: #f4ead6;
+  background: #020711;
+}
+
+.experience--paused .world-globe {
+  opacity: 0.72;
+}
+
+.globe-stage {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  overflow: hidden;
+  background: #020711;
+}
+
+.world-globe {
+  width: 100%;
+  height: 100%;
+  transition: opacity 700ms ease;
+}
+
+.world-globe__canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.experience-dock {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0 max(1rem, env(safe-area-inset-right)) max(1.55rem, env(safe-area-inset-bottom)) max(1rem, env(safe-area-inset-left));
+  text-align: center;
+  pointer-events: none;
+}
+
+.experience-dock::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(2, 6, 14, 0.98) 0%,
+    rgba(2, 6, 14, 0.92) 18%,
+    rgba(2, 6, 14, 0.56) 42%,
+    rgba(2, 6, 14, 0.12) 66%,
+    rgba(2, 6, 14, 0) 78%
+  );
+  content: '';
+  pointer-events: none;
+}
+
+.story-block {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 54svh 4vw 0;
+  pointer-events: auto;
+}
+
+.story-title {
+  flex: 0 0 auto;
+  margin: 0;
+  color: #f4ead6;
+  font-family: 'Caveat Brush', 'Bradley Hand', cursive;
+  font-size: clamp(2.1rem, 4.4vw, 3.9rem);
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1;
+  text-shadow: 0 0 34px rgba(120, 190, 215, 0.28);
+}
+
+.story-beat {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  justify-items: center;
+  width: min(100%, 1500px);
+  min-height: clamp(10rem, 22svh, 20rem);
+  margin-top: clamp(0.8rem, 2.2svh, 2rem);
+  row-gap: clamp(0.55rem, 1.8svh, 1.7rem);
+  animation: story-arrival 1.35s ease both;
+}
+
+.story-eyebrow {
+  height: auto;
+  margin: 0;
+  color: #e2b458;
+  font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: clamp(0.67rem, 0.9vw, 0.78rem);
+  letter-spacing: 0.34em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.story-headline {
+  align-self: center;
+  max-width: min(96vw, 1500px);
+  height: auto;
+  margin: 0;
+  color: #f4ead6;
+  font-family: 'Caveat Brush', 'Bradley Hand', cursive;
+  font-size: clamp(1.9rem, 3.9vw, 3.5rem);
+  font-weight: 400;
+  line-height: 1.16;
+  text-wrap: balance;
+  text-shadow: 0 2px 40px rgba(4, 6, 13, 0.9);
+}
+
+.story-body {
+  align-self: end;
+  max-width: min(92vw, 74rem);
+  height: auto;
+  margin: 0;
+  color: #9cadb9;
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: clamp(1rem, 1.5vw, 1.4rem);
+  line-height: 1.4;
+  text-wrap: balance;
+}
+
+.birth-counter {
+  margin: clamp(0.55rem, 2.4svh, 2rem) 0 0;
+  color: #cfe0e6;
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: clamp(1.1rem, 1.7vw, 1.5rem);
+  letter-spacing: 0.01em;
+  line-height: 1.35;
+}
+
+.birth-counter strong {
+  color: #e2b458;
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+}
+
+.story-continuation,
+.methodology-note {
+  display: none;
+}
+
+.dock-meta {
+  position: absolute;
+  right: 0;
+  bottom: max(5.75rem, env(safe-area-inset-bottom));
+  left: 0;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  pointer-events: auto;
+}
+
+.dock-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1.25rem, 3vw, 3rem);
+  font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: clamp(0.72rem, 1vw, 0.9rem);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.methodology-link,
+.sound-toggle {
+  padding: 0 0 0.22rem;
+  border: 0;
+  border-bottom: 1px solid rgba(226, 180, 88, 0.32);
+  color: #758692;
+  background: transparent;
+  font: inherit;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 300ms ease, border-color 300ms ease;
+}
+
+.sound-toggle {
+  border-bottom-color: rgba(143, 162, 173, 0.48);
+}
+
+.sound-toggle--enabled {
+  border-bottom-color: rgba(226, 180, 88, 0.58);
+  color: #e2b458;
+}
+
+.methodology-link:hover,
+.methodology-link:focus-visible,
+.sound-toggle:hover,
+.sound-toggle:focus-visible {
+  color: #f4ead6;
+  border-bottom-color: #f4ead6;
+}
+
+.methodology-link:focus-visible,
+.sound-toggle:focus-visible,
+.methodology-close:focus-visible {
+  outline: 2px solid #e2b458;
+  outline-offset: 4px;
+}
+
+.methodology-backdrop {
+  position: fixed;
+  z-index: 10;
+  inset: 0;
+  pointer-events: auto;
+  background: transparent;
+}
+
+.methodology-dialog {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  width: min(420px, 88vw);
+  padding: clamp(2rem, 4vw, 3.25rem);
+  overflow-y: auto;
+  border: 0;
+  border-left: 1px solid rgba(226, 180, 88, 0.16);
+  border-radius: 0;
+  color: #f4ead6;
+  background: rgba(6, 10, 18, 0.94);
+  box-shadow: -1.5rem 0 4rem rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(14px);
+  transform: translateX(0);
+}
+
+.methodology-close {
+  align-self: flex-start;
+  margin-top: auto;
+  padding: 0;
+  border: 0;
+  color: #e2b458;
+  background: transparent;
+  font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.methodology-kicker {
+  margin: 0;
+  color: #e2b458;
+  font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.methodology-dialog h2 {
+  margin: 0;
+  color: #f4ead6;
+  font-family: 'Caveat Brush', 'Bradley Hand', cursive;
+  font-size: 2.35rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.methodology-dialog h3 {
+  margin: 0.6rem 0 -0.45rem;
+  color: #e2b458;
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 1.15rem;
+  font-weight: 500;
+}
+
+.methodology-dialog p {
+  margin: 0;
+  color: #a8b8c1;
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 1.1rem;
+  line-height: 1.55;
+}
+
+.methodology-dialog .methodology-source {
+  display: block;
+  margin-top: 0.4rem;
+  color: #6f818c;
+  font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.72rem;
+  line-height: 1.5;
+}
+
+@keyframes story-arrival {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+    filter: blur(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@media (max-width: 720px) {
+  .experience {
+    min-height: 560px;
+  }
+
+  .story-block {
+    padding-top: 54svh;
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+
+  .story-title {
+    font-size: 2.55rem;
+  }
+
+  .story-beat {
+    width: 100%;
+    min-height: clamp(10rem, 22svh, 13rem);
+  }
+
+  .story-eyebrow {
+    font-size: 0.62rem;
+    letter-spacing: 0.23em;
+  }
+
+  .story-headline {
+    max-width: 21rem;
+    font-size: 1.85rem;
+  }
+
+  .story-body {
+    max-width: 21rem;
+    font-size: 1.04rem;
+  }
+
+  .birth-counter {
+    font-size: 1.1rem;
+  }
+
+  .dock-actions {
+    gap: 1rem;
+    font-size: 0.63rem;
+    letter-spacing: 0.11em;
+  }
+
+  .dock-meta {
+    bottom: max(2rem, env(safe-area-inset-bottom));
+  }
+
+  .methodology-dialog {
+    width: min(100%, 360px);
+    padding: 2rem 1.5rem 1.4rem;
+  }
+}
+
+@media (min-width: 721px) {
+  .story-block {
+    padding-top: 55svh;
+  }
+
+  .story-title {
+    font-size: clamp(2.1rem, 4.4vw, 4.5rem);
+  }
+
+  .story-beat {
+    min-height: 17rem;
+    margin-top: clamp(1.5rem, 2.6svh, 2.5rem);
+  }
+
+  .story-headline {
+    white-space: nowrap;
+  }
+
+  .birth-counter {
+    margin-top: clamp(3rem, 6.5svh, 6.25rem);
+  }
+}
+
+@media (max-height: 800px) and (min-width: 721px) {
+  .story-block {
+    padding-top: 50svh;
+  }
+
+  .story-beat {
+    min-height: 9rem;
+    row-gap: 0.55rem;
+    margin-top: 1.5rem;
+  }
+
+  .story-headline {
+    font-size: 2rem;
+  }
+
+  .story-body {
+    font-size: 1rem;
+  }
+
+  .birth-counter {
+    margin-top: 1.5rem;
+  }
+
+  .dock-meta {
+    bottom: max(1.55rem, env(safe-area-inset-bottom));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
