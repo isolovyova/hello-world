@@ -3,10 +3,11 @@ import birthDataset from './data/births-2026.json';
 import { BirthCounter } from './components/BirthCounter';
 import { Methodology } from './components/Methodology';
 import { SoundToggle } from './components/SoundToggle';
+import { TEXT_ENTRANCES, TextSlot } from './components/TextSlot';
 import { WorldGlobe } from './components/WorldGlobe';
 import { createSoundscape, type SoundscapeControls } from './audio/soundscape';
 import { useActiveSessionTime } from './hooks/useActiveSessionTime';
-import { getStoryBeat, getStoryHeadline } from './narrative';
+import { getStoryBeat, getStoryHeadline, type StoryBeatState } from './narrative';
 import { createBirthSimulation } from './simulation/birthProcess';
 import { randomPointInCountry } from './simulation/randomPointInCountry';
 import { createWeightedCountries, selectCountry } from './simulation/weightedCountry';
@@ -15,6 +16,11 @@ import './styles/global.css';
 
 const dataset = birthDataset as BirthDataset;
 const MAX_ACTIVE_POINTS = 500;
+
+// The three lines land in sequence rather than all at once.
+const HEADLINE_DELAY_MS = 260;
+const SUBLINE_DELAY_MS = 900;
+const HEADLINE_WORD_DELAY_MS = 120;
 
 function newEventId(): string {
   return globalThis.crypto?.randomUUID?.() ?? `${Date.now()}-${Math.random().toString(16).slice(2)}`;
@@ -35,6 +41,21 @@ function useReducedMotion(): boolean {
   return reducedMotion;
 }
 
+/**
+ * Holds a story beat back so the eyebrow, headline and subline arrive in sequence.
+ * Returns null until the first beat is due, which staggers the opening load too.
+ */
+function useDelayedStory(story: StoryBeatState, delayMs: number): StoryBeatState | null {
+  const [delayed, setDelayed] = useState<StoryBeatState | null>(null);
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => setDelayed(story), delayMs);
+    return () => window.clearTimeout(timer);
+  }, [story, delayMs]);
+
+  return delayed;
+}
+
 export default function App() {
   const [births, setBirths] = useState<BirthEvent[]>([]);
   const [birthCount, setBirthCount] = useState(0);
@@ -48,8 +69,19 @@ export default function App() {
   const soundEnabledRef = useRef(false);
   const storyBeatRef = useRef('0:one-minute-on-earth');
 
-  const currentStory = useMemo(() => getStoryBeat(elapsedSeconds, dataset), [elapsedSeconds]);
-  const storyHeadline = getStoryHeadline(currentStory.beat, birthCount);
+  const tickingStory = useMemo(() => getStoryBeat(elapsedSeconds, dataset), [elapsedSeconds]);
+
+  // The session clock ticks ten times a second, so pin the object identity to the
+  // beat itself — the staged timers below key off it.
+  const stableStoryRef = useRef(tickingStory);
+  if (stableStoryRef.current.instanceKey !== tickingStory.instanceKey) {
+    stableStoryRef.current = tickingStory;
+  }
+  const currentStory = stableStoryRef.current;
+
+  const headlineStory = useDelayedStory(currentStory, HEADLINE_DELAY_MS);
+  const sublineStory = useDelayedStory(currentStory, SUBLINE_DELAY_MS);
+  const headlineEntrance = TEXT_ENTRANCES[(headlineStory?.messageIndex ?? 0) % TEXT_ENTRANCES.length];
 
   useEffect(() => {
     const simulation = createBirthSimulation({
@@ -159,26 +191,43 @@ export default function App() {
         <WorldGlobe births={births} reducedMotion={reducedMotion} />
       </section>
 
-      <section className="experience-dock" aria-label="Experience information">
-        <div className="story-block">
-          <h1 className="story-title">Hello, World.</h1>
-          <div className="story-beat" key={currentStory.instanceKey} aria-live="polite">
-            <p className="story-eyebrow">{currentStory.beat.eyebrow}</p>
-            <p className="story-headline">{storyHeadline}</p>
-            <p className="story-body">{currentStory.beat.body}</p>
-          </div>
-          <BirthCounter count={birthCount} />
-          <p className="story-continuation">stay a little longer</p>
+      <div className="veil" aria-hidden="true" />
+
+      <section className="stage" aria-label="Experience information">
+        <h1 className="story-title">Hello, World.</h1>
+
+        <div className="story-beat" aria-live="polite">
+          <TextSlot
+            className="story-eyebrow"
+            text={currentStory.beat.eyebrow}
+            revision={currentStory.messageIndex}
+            entrance="track"
+            reducedMotion={reducedMotion}
+          />
+          <TextSlot
+            className="story-headline"
+            text={headlineStory ? getStoryHeadline(headlineStory.beat, birthCount) : ''}
+            revision={headlineStory?.messageIndex ?? -1}
+            entrance={headlineEntrance}
+            wordDelayMs={HEADLINE_WORD_DELAY_MS}
+            reducedMotion={reducedMotion}
+          />
+          <TextSlot
+            className="story-body"
+            text={sublineStory?.beat.body ?? ''}
+            revision={sublineStory?.messageIndex ?? -1}
+            entrance="soft"
+            reducedMotion={reducedMotion}
+          />
         </div>
 
-        <div className="dock-meta">
-          <p className="methodology-note">A statistical simulation based on UN population projections.</p>
-          <div className="dock-actions">
-            <SoundToggle enabled={soundEnabled} onToggle={handleSoundToggle} />
-            <button className="methodology-link" type="button" onClick={() => setMethodologyOpen(true)}>
-              About the numbers
-            </button>
-          </div>
+        <BirthCounter count={birthCount} />
+
+        <div className="foot">
+          <SoundToggle enabled={soundEnabled} onToggle={handleSoundToggle} />
+          <button className="methodology-link" type="button" onClick={() => setMethodologyOpen(true)}>
+            About the numbers
+          </button>
         </div>
       </section>
 

@@ -15,6 +15,8 @@ export type StoryBeatState = {
   beat: StoryBeat;
   beatIndex: number;
   cycleIndex: number;
+  /** Monotonic index across cycles, so entrance animations keep rolling instead of repeating per cycle. */
+  messageIndex: number;
   instanceKey: string;
 };
 
@@ -158,6 +160,7 @@ export function getStoryBeat(elapsedSeconds: number, dataset: StoryDataset): Sto
     beat,
     beatIndex,
     cycleIndex,
+    messageIndex: cycleIndex * beats.length + beatIndex,
     instanceKey: `${cycleIndex}:${beat.id}`,
   };
 }

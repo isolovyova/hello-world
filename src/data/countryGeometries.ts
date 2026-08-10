@@ -1,5 +1,5 @@
-import { feature } from 'topojson-client';
-import type { Feature, FeatureCollection, Geometry } from 'geojson';
+import { feature, mesh } from 'topojson-client';
+import type { Feature, FeatureCollection, Geometry, MultiLineString } from 'geojson';
 import worldAtlas from 'world-atlas/countries-110m.json';
 
 type CountryFeature = Feature<Geometry, Record<string, unknown>> & {
@@ -30,4 +30,17 @@ export function getCountryGeometry(m49: number): CountryFeature | undefined {
 
 export function getAllCountryGeometries(): CountryFeature[] {
   return [...new Set(byId.values())];
+}
+
+let bordersMesh: MultiLineString | undefined;
+
+/** Shared borders only — the outer coastline is already drawn as the land stroke. */
+export function getCountryBorders(): MultiLineString {
+  bordersMesh ??= mesh(
+    worldAtlas as never,
+    worldAtlas.objects.countries as never,
+    (a, b) => a !== b,
+  ) as unknown as MultiLineString;
+
+  return bordersMesh;
 }
