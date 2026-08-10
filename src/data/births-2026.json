@@ -1,0 +1,2143 @@
+{
+  "source": "United Nations, Department of Economic and Social Affairs, Population Division (2024). World Population Prospects: The 2024 Revision, custom data acquired via website.",
+  "sourceUrl": "https://population.un.org/wpp/",
+  "indicator": {
+    "id": 57,
+    "shortName": "TBirths",
+    "name": "Total births by sex",
+    "sex": "Both sexes",
+    "variant": "Median",
+    "variantId": 4
+  },
+  "year": 2026,
+  "variant": "Median",
+  "worldBirths": 132503451,
+  "secondsInYear": 31536000,
+  "lambdaGlobal": 4.201656868340944,
+  "countries": [
+    {
+      "m49": 356,
+      "iso3": "IND",
+      "name": "India",
+      "annualBirths": 22988461,
+      "weight": 0.17349330018581932,
+      "latitude": 20.59368324279785,
+      "longitude": 78.96288299560547
+    },
+    {
+      "m49": 156,
+      "iso3": "CHN",
+      "name": "China",
+      "annualBirths": 8625232,
+      "weight": 0.06509439516409274,
+      "latitude": 35.86166000366211,
+      "longitude": 104.19539642333984
+    },
+    {
+      "m49": 566,
+      "iso3": "NGA",
+      "name": "Nigeria",
+      "annualBirths": 7711752,
+      "weight": 0.0582003860412662,
+      "latitude": 9.081998825073242,
+      "longitude": 8.675276756286621
+    },
+    {
+      "m49": 586,
+      "iso3": "PAK",
+      "name": "Pakistan",
+      "annualBirths": 6935665,
+      "weight": 0.05234327821393874,
+      "latitude": 30.375320434570312,
+      "longitude": 69.3451156616211
+    },
+    {
+      "m49": 180,
+      "iso3": "COD",
+      "name": "Democratic Republic of the Congo",
+      "annualBirths": 4634979,
+      "weight": 0.03498006251927733,
+      "latitude": -4.038332939147949,
+      "longitude": 21.75866317749023
+    },
+    {
+      "m49": 360,
+      "iso3": "IDN",
+      "name": "Indonesia",
+      "annualBirths": 4419970,
+      "weight": 0.033357395348140785,
+      "latitude": -0.7892749905586243,
+      "longitude": 113.92132568359376
+    },
+    {
+      "m49": 231,
+      "iso3": "ETH",
+      "name": "Ethiopia",
+      "annualBirths": 4213081,
+      "weight": 0.03179600959978016,
+      "latitude": 9.145000457763672,
+      "longitude": 40.48967361450195
+    },
+    {
+      "m49": 840,
+      "iso3": "USA",
+      "name": "United States of America",
+      "annualBirths": 3673260,
+      "weight": 0.027721994953927652,
+      "latitude": 37.090240478515625,
+      "longitude": -95.712890625
+    },
+    {
+      "m49": 50,
+      "iso3": "BGD",
+      "name": "Bangladesh",
+      "annualBirths": 3407860,
+      "weight": 0.025719028253837706,
+      "latitude": 23.684993743896484,
+      "longitude": 90.35633087158203
+    },
+    {
+      "m49": 76,
+      "iso3": "BRA",
+      "name": "Brazil",
+      "annualBirths": 2492914,
+      "weight": 0.018813955268229203,
+      "latitude": -14.235004425048828,
+      "longitude": -51.9252815246582
+    },
+    {
+      "m49": 834,
+      "iso3": "TZA",
+      "name": "United Republic of Tanzania",
+      "annualBirths": 2459538,
+      "weight": 0.018562067489095058,
+      "latitude": -6.369028091430664,
+      "longitude": 34.88882064819336
+    },
+    {
+      "m49": 818,
+      "iso3": "EGY",
+      "name": "Egypt",
+      "annualBirths": 2459317,
+      "weight": 0.01856039960800719,
+      "latitude": 26.820552825927734,
+      "longitude": 30.80249786376953
+    },
+    {
+      "m49": 484,
+      "iso3": "MEX",
+      "name": "Mexico",
+      "annualBirths": 1989217,
+      "weight": 0.015012567483997078,
+      "latitude": 23.63450050354004,
+      "longitude": -102.55278778076172
+    },
+    {
+      "m49": 608,
+      "iso3": "PHL",
+      "name": "Philippines",
+      "annualBirths": 1853794,
+      "weight": 0.013990533725797073,
+      "latitude": 12.879720687866213,
+      "longitude": 121.77401733398438
+    },
+    {
+      "m49": 800,
+      "iso3": "UGA",
+      "name": "Uganda",
+      "annualBirths": 1746979,
+      "weight": 0.01318440377828348,
+      "latitude": 1.373332977294922,
+      "longitude": 32.29027557373047
+    },
+    {
+      "m49": 729,
+      "iso3": "SDN",
+      "name": "Sudan",
+      "annualBirths": 1694024,
+      "weight": 0.012784753809921525,
+      "latitude": 12.862807273864746,
+      "longitude": 30.21763610839844
+    },
+    {
+      "m49": 404,
+      "iso3": "KEN",
+      "name": "Kenya",
+      "annualBirths": 1558303,
+      "weight": 0.011760471053693537,
+      "latitude": -0.023559000343084335,
+      "longitude": 37.906192779541016
+    },
+    {
+      "m49": 4,
+      "iso3": "AFG",
+      "name": "Afghanistan",
+      "annualBirths": 1520756,
+      "weight": 0.011477104849140872,
+      "latitude": 33.939109802246094,
+      "longitude": 67.70995330810547
+    },
+    {
+      "m49": 24,
+      "iso3": "AGO",
+      "name": "Angola",
+      "annualBirths": 1461075,
+      "weight": 0.011026693938711075,
+      "latitude": -11.202692031860352,
+      "longitude": 17.873886108398438
+    },
+    {
+      "m49": 887,
+      "iso3": "YEM",
+      "name": "Yemen",
+      "annualBirths": 1406796,
+      "weight": 0.010617051777768415,
+      "latitude": 15.552726745605469,
+      "longitude": 48.516387939453125
+    },
+    {
+      "m49": 508,
+      "iso3": "MOZ",
+      "name": "Mozambique",
+      "annualBirths": 1323752,
+      "weight": 0.009990320931339365,
+      "latitude": -18.665695190429688,
+      "longitude": 35.529563903808594
+    },
+    {
+      "m49": 704,
+      "iso3": "VNM",
+      "name": "Viet Nam",
+      "annualBirths": 1307471,
+      "weight": 0.009867448659884337,
+      "latitude": 14.058323860168455,
+      "longitude": 108.27719879150392
+    },
+    {
+      "m49": 643,
+      "iso3": "RUS",
+      "name": "Russian Federation",
+      "annualBirths": 1213374,
+      "weight": 0.009157301118142199,
+      "latitude": 61.52400970458984,
+      "longitude": 105.31875610351564
+    },
+    {
+      "m49": 368,
+      "iso3": "IRQ",
+      "name": "Iraq",
+      "annualBirths": 1200201,
+      "weight": 0.009057884839542783,
+      "latitude": 33.22319030761719,
+      "longitude": 43.679290771484375
+    },
+    {
+      "m49": 710,
+      "iso3": "ZAF",
+      "name": "South Africa",
+      "annualBirths": 1167803,
+      "weight": 0.008813378000245443,
+      "latitude": -30.55948257446289,
+      "longitude": 22.9375057220459
+    },
+    {
+      "m49": 562,
+      "iso3": "NER",
+      "name": "Niger",
+      "annualBirths": 1157021,
+      "weight": 0.008732006534682632,
+      "latitude": 17.6077880859375,
+      "longitude": 8.081665992736816
+    },
+    {
+      "m49": 364,
+      "iso3": "IRN",
+      "name": "Iran (Islamic Republic of)",
+      "annualBirths": 1101751,
+      "weight": 0.00831488532325094,
+      "latitude": 32.42790985107422,
+      "longitude": 53.688045501708984
+    },
+    {
+      "m49": 792,
+      "iso3": "TUR",
+      "name": "Türkiye",
+      "annualBirths": 1045681,
+      "weight": 0.007891726533220633,
+      "latitude": 38.9637451171875,
+      "longitude": 35.24332046508789
+    },
+    {
+      "m49": 450,
+      "iso3": "MDG",
+      "name": "Madagascar",
+      "annualBirths": 1033723,
+      "weight": 0.007801479827117861,
+      "latitude": -18.76694679260254,
+      "longitude": 46.86910629272461
+    },
+    {
+      "m49": 384,
+      "iso3": "CIV",
+      "name": "Côte d'Ivoire",
+      "annualBirths": 1028953,
+      "weight": 0.00776548076472363,
+      "latitude": 7.539988994598389,
+      "longitude": -5.547080039978027
+    },
+    {
+      "m49": 466,
+      "iso3": "MLI",
+      "name": "Mali",
+      "annualBirths": 1005407,
+      "weight": 0.007587779732619945,
+      "latitude": 17.57069206237793,
+      "longitude": -3.996165990829468
+    },
+    {
+      "m49": 120,
+      "iso3": "CMR",
+      "name": "Cameroon",
+      "annualBirths": 991664,
+      "weight": 0.007484061679269018,
+      "latitude": 7.36972188949585,
+      "longitude": 12.354722023010254
+    },
+    {
+      "m49": 148,
+      "iso3": "TCD",
+      "name": "Chad",
+      "annualBirths": 909765,
+      "weight": 0.006865972117209234,
+      "latitude": 15.454166412353516,
+      "longitude": 18.732206344604492
+    },
+    {
+      "m49": 288,
+      "iso3": "GHA",
+      "name": "Ghana",
+      "annualBirths": 903735,
+      "weight": 0.006820463868522187,
+      "latitude": 7.946527004241944,
+      "longitude": -1.0231939554214478
+    },
+    {
+      "m49": 860,
+      "iso3": "UZB",
+      "name": "Uzbekistan",
+      "annualBirths": 894379,
+      "weight": 0.0067498543868114045,
+      "latitude": 41.37749099731445,
+      "longitude": 64.58525848388672
+    },
+    {
+      "m49": 104,
+      "iso3": "MMR",
+      "name": "Myanmar",
+      "annualBirths": 881077,
+      "weight": 0.006649464548662963,
+      "latitude": 21.916221618652344,
+      "longitude": 95.95597076416016
+    },
+    {
+      "m49": 706,
+      "iso3": "SOM",
+      "name": "Somalia",
+      "annualBirths": 836420,
+      "weight": 0.006312439364315123,
+      "latitude": 5.152149200439453,
+      "longitude": 46.199615478515625
+    },
+    {
+      "m49": 12,
+      "iso3": "DZA",
+      "name": "Algeria",
+      "annualBirths": 832197,
+      "weight": 0.006280568496287693,
+      "latitude": 28.033885955810547,
+      "longitude": 1.659626007080078
+    },
+    {
+      "m49": 854,
+      "iso3": "BFA",
+      "name": "Burkina Faso",
+      "annualBirths": 747913,
+      "weight": 0.005644479403030794,
+      "latitude": 12.238332748413086,
+      "longitude": -1.5615930557250977
+    },
+    {
+      "m49": 392,
+      "iso3": "JPN",
+      "name": "Japan",
+      "annualBirths": 745943,
+      "weight": 0.005629611865731708,
+      "latitude": 36.2048225402832,
+      "longitude": 138.2529296875
+    },
+    {
+      "m49": 894,
+      "iso3": "ZMB",
+      "name": "Zambia",
+      "annualBirths": 721060,
+      "weight": 0.0054418205303950916,
+      "latitude": -13.133896827697754,
+      "longitude": 27.84933280944824
+    },
+    {
+      "m49": 454,
+      "iso3": "MWI",
+      "name": "Malawi",
+      "annualBirths": 692256,
+      "weight": 0.005224437512952021,
+      "latitude": -13.254307746887209,
+      "longitude": 34.3015251159668
+    },
+    {
+      "m49": 276,
+      "iso3": "DEU",
+      "name": "Germany",
+      "annualBirths": 689997,
+      "weight": 0.005207388900384187,
+      "latitude": 51.16569137573242,
+      "longitude": 10.451525688171388
+    },
+    {
+      "m49": 170,
+      "iso3": "COL",
+      "name": "Colombia",
+      "annualBirths": 684798,
+      "weight": 0.005168152186466449,
+      "latitude": 4.570868015289307,
+      "longitude": -74.29733276367188
+    },
+    {
+      "m49": 826,
+      "iso3": "GBR",
+      "name": "United Kingdom",
+      "annualBirths": 678001,
+      "weight": 0.005116855409297981,
+      "latitude": 55.3780517578125,
+      "longitude": -3.4359729290008545
+    },
+    {
+      "m49": 250,
+      "iso3": "FRA",
+      "name": "France",
+      "annualBirths": 633972,
+      "weight": 0.004784569724150052,
+      "latitude": 46.227638244628906,
+      "longitude": 2.2137489318847656
+    },
+    {
+      "m49": 760,
+      "iso3": "SYR",
+      "name": "Syrian Arab Republic",
+      "annualBirths": 625121,
+      "weight": 0.0047177714639296455,
+      "latitude": 34.80207443237305,
+      "longitude": 38.9968147277832
+    },
+    {
+      "m49": 504,
+      "iso3": "MAR",
+      "name": "Morocco",
+      "annualBirths": 613838,
+      "weight": 0.004632618964769453,
+      "latitude": 31.791702270507812,
+      "longitude": -7.092619895935059
+    },
+    {
+      "m49": 682,
+      "iso3": "SAU",
+      "name": "Saudi Arabia",
+      "annualBirths": 567889,
+      "weight": 0.004285843090984853,
+      "latitude": 23.885942459106445,
+      "longitude": 45.07916259765625
+    },
+    {
+      "m49": 764,
+      "iso3": "THA",
+      "name": "Thailand",
+      "annualBirths": 566113,
+      "weight": 0.004272439666495932,
+      "latitude": 15.87003231048584,
+      "longitude": 100.99253845214844
+    },
+    {
+      "m49": 686,
+      "iso3": "SEN",
+      "name": "Senegal",
+      "annualBirths": 554508,
+      "weight": 0.004184857041949798,
+      "latitude": 14.497401237487791,
+      "longitude": -14.452362060546877
+    },
+    {
+      "m49": 524,
+      "iso3": "NPL",
+      "name": "Nepal",
+      "annualBirths": 542047,
+      "weight": 0.004090814208303148,
+      "latitude": 28.39485740661621,
+      "longitude": 84.12400817871094
+    },
+    {
+      "m49": 604,
+      "iso3": "PER",
+      "name": "Peru",
+      "annualBirths": 532846,
+      "weight": 0.004021374507445848,
+      "latitude": -9.189967155456545,
+      "longitude": -75.01515197753906
+    },
+    {
+      "m49": 32,
+      "iso3": "ARG",
+      "name": "Argentina",
+      "annualBirths": 510178,
+      "weight": 0.003850299717854141,
+      "latitude": -38.41609573364258,
+      "longitude": -63.61667251586914
+    },
+    {
+      "m49": 716,
+      "iso3": "ZWE",
+      "name": "Zimbabwe",
+      "annualBirths": 505305,
+      "weight": 0.003813523317215338,
+      "latitude": -19.015438079833984,
+      "longitude": 29.154857635498047
+    },
+    {
+      "m49": 324,
+      "iso3": "GIN",
+      "name": "Guinea",
+      "annualBirths": 497357,
+      "weight": 0.0037535399738381154,
+      "latitude": 9.945587158203123,
+      "longitude": -9.69664478302002
+    },
+    {
+      "m49": 204,
+      "iso3": "BEN",
+      "name": "Benin",
+      "annualBirths": 494197,
+      "weight": 0.003729691538373593,
+      "latitude": 9.307689666748047,
+      "longitude": 2.315834045410156
+    },
+    {
+      "m49": 108,
+      "iso3": "BDI",
+      "name": "Burundi",
+      "annualBirths": 471624,
+      "weight": 0.003559333711240472,
+      "latitude": -3.373055934906006,
+      "longitude": 29.918886184692383
+    },
+    {
+      "m49": 458,
+      "iso3": "MYS",
+      "name": "Malaysia",
+      "annualBirths": 440401,
+      "weight": 0.0033236945655098445,
+      "latitude": 4.210484027862549,
+      "longitude": 101.97576904296876
+    },
+    {
+      "m49": 862,
+      "iso3": "VEN",
+      "name": "Venezuela (Bolivarian Republic of)",
+      "annualBirths": 439529,
+      "weight": 0.0033171136048373564,
+      "latitude": 6.423749923706055,
+      "longitude": -66.58972930908203
+    },
+    {
+      "m49": 646,
+      "iso3": "RWA",
+      "name": "Rwanda",
+      "annualBirths": 409278,
+      "weight": 0.0030888101171040443,
+      "latitude": -1.9402780532836912,
+      "longitude": 29.87388801574707
+    },
+    {
+      "m49": 398,
+      "iso3": "KAZ",
+      "name": "Kazakhstan",
+      "annualBirths": 390247,
+      "weight": 0.002945183669216283,
+      "latitude": 48.01957321166992,
+      "longitude": 66.9236831665039
+    },
+    {
+      "m49": 320,
+      "iso3": "GTM",
+      "name": "Guatemala",
+      "annualBirths": 380396,
+      "weight": 0.002870838435747609,
+      "latitude": 15.78347110748291,
+      "longitude": -90.23075866699219
+    },
+    {
+      "m49": 380,
+      "iso3": "ITA",
+      "name": "Italy",
+      "annualBirths": 379621,
+      "weight": 0.002864989531480203,
+      "latitude": 41.87194061279297,
+      "longitude": 12.567379951477053
+    },
+    {
+      "m49": 728,
+      "iso3": "SSD",
+      "name": "South Sudan",
+      "annualBirths": 365962,
+      "weight": 0.0027619054238821297,
+      "latitude": 6.8769917488098145,
+      "longitude": 31.306978225708008
+    },
+    {
+      "m49": 124,
+      "iso3": "CAN",
+      "name": "Canada",
+      "annualBirths": 361315,
+      "weight": 0.002726834639197435,
+      "latitude": 56.130367279052734,
+      "longitude": -106.34677124023438
+    },
+    {
+      "m49": 116,
+      "iso3": "KHM",
+      "name": "Cambodia",
+      "annualBirths": 352442,
+      "weight": 0.0026598703455655657,
+      "latitude": 12.565678596496582,
+      "longitude": 104.990966796875
+    },
+    {
+      "m49": 408,
+      "iso3": "PRK",
+      "name": "Dem. People's Rep. of Korea",
+      "annualBirths": 328497,
+      "weight": 0.002479158071135823,
+      "latitude": 40.33985137939453,
+      "longitude": 127.51009368896484
+    },
+    {
+      "m49": 724,
+      "iso3": "ESP",
+      "name": "Spain",
+      "annualBirths": 327412,
+      "weight": 0.0024709696051614534,
+      "latitude": 40.463668823242195,
+      "longitude": -3.74921989440918
+    },
+    {
+      "m49": 144,
+      "iso3": "LKA",
+      "name": "Sri Lanka",
+      "annualBirths": 316459,
+      "weight": 0.00238830760717319,
+      "latitude": 7.873054027557373,
+      "longitude": 80.77179718017578
+    },
+    {
+      "m49": 36,
+      "iso3": "AUS",
+      "name": "Australia",
+      "annualBirths": 303345,
+      "weight": 0.002289336599995422,
+      "latitude": -25.274398803710938,
+      "longitude": 133.77513122558594
+    },
+    {
+      "m49": 768,
+      "iso3": "TGO",
+      "name": "Togo",
+      "annualBirths": 299393,
+      "weight": 0.0022595109617182725,
+      "latitude": 8.619543075561523,
+      "longitude": 0.8247820138931273
+    },
+    {
+      "m49": 616,
+      "iso3": "POL",
+      "name": "Poland",
+      "annualBirths": 283495,
+      "weight": 0.0021395291810173307,
+      "latitude": 51.919437408447266,
+      "longitude": 19.1451358795166
+    },
+    {
+      "m49": 218,
+      "iso3": "ECU",
+      "name": "Ecuador",
+      "annualBirths": 267031,
+      "weight": 0.00201527581345787,
+      "latitude": -1.8312389850616455,
+      "longitude": -78.18340301513672
+    },
+    {
+      "m49": 762,
+      "iso3": "TJK",
+      "name": "Tajikistan",
+      "annualBirths": 261679,
+      "weight": 0.0019748844126331474,
+      "latitude": 38.86103439331055,
+      "longitude": 71.27609252929688
+    },
+    {
+      "m49": 68,
+      "iso3": "BOL",
+      "name": "Bolivia (Plurinational State of)",
+      "annualBirths": 261496,
+      "weight": 0.0019735033165287144,
+      "latitude": -16.29015350341797,
+      "longitude": -63.588653564453125
+    },
+    {
+      "m49": 694,
+      "iso3": "SLE",
+      "name": "Sierra Leone",
+      "annualBirths": 261328,
+      "weight": 0.0019722354250230056,
+      "latitude": 8.460555076599121,
+      "longitude": -11.779889106750488
+    },
+    {
+      "m49": 598,
+      "iso3": "PNG",
+      "name": "Papua New Guinea",
+      "annualBirths": 257492,
+      "weight": 0.001943285235642655,
+      "latitude": -6.314992904663086,
+      "longitude": 143.95555114746094
+    },
+    {
+      "m49": 332,
+      "iso3": "HTI",
+      "name": "Haiti",
+      "annualBirths": 256749,
+      "weight": 0.001937677834519193,
+      "latitude": 18.971187591552734,
+      "longitude": -72.28521728515625
+    },
+    {
+      "m49": 140,
+      "iso3": "CAF",
+      "name": "Central African Republic",
+      "annualBirths": 254783,
+      "weight": 0.001922840485113101,
+      "latitude": 6.611111164093018,
+      "longitude": 20.939443588256836
+    },
+    {
+      "m49": 410,
+      "iso3": "KOR",
+      "name": "Republic of Korea",
+      "annualBirths": 249556,
+      "weight": 0.0018833924559444116,
+      "latitude": 35.90775680541992,
+      "longitude": 127.76692199707033
+    },
+    {
+      "m49": 804,
+      "iso3": "UKR",
+      "name": "Ukraine",
+      "annualBirths": 242008,
+      "weight": 0.0018264279018664956,
+      "latitude": 48.379432678222656,
+      "longitude": 31.16558074951172
+    },
+    {
+      "m49": 340,
+      "iso3": "HND",
+      "name": "Honduras",
+      "annualBirths": 234199,
+      "weight": 0.0017674935877707819,
+      "latitude": 15.19999885559082,
+      "longitude": -86.24190521240233
+    },
+    {
+      "m49": 400,
+      "iso3": "JOR",
+      "name": "Jordan",
+      "annualBirths": 222912,
+      "weight": 0.001682310900717597,
+      "latitude": 30.58516311645508,
+      "longitude": 36.2384147644043
+    },
+    {
+      "m49": 178,
+      "iso3": "COG",
+      "name": "Congo",
+      "annualBirths": 198689,
+      "weight": 0.001499500567724836,
+      "latitude": -0.22802099585533145,
+      "longitude": 15.827658653259276
+    },
+    {
+      "m49": 214,
+      "iso3": "DOM",
+      "name": "Dominican Republic",
+      "annualBirths": 196929,
+      "weight": 0.0014862178948078868,
+      "latitude": 18.735692977905273,
+      "longitude": -70.16265106201172
+    },
+    {
+      "m49": 478,
+      "iso3": "MRT",
+      "name": "Mauritania",
+      "annualBirths": 181311,
+      "weight": 0.0013683492666164596,
+      "latitude": 21.007890701293945,
+      "longitude": -10.940834999084473
+    },
+    {
+      "m49": 642,
+      "iso3": "ROU",
+      "name": "Romania",
+      "annualBirths": 176198,
+      "weight": 0.0013297615923980727,
+      "latitude": 45.943161010742195,
+      "longitude": 24.966760635375977
+    },
+    {
+      "m49": 528,
+      "iso3": "NLD",
+      "name": "Netherlands",
+      "annualBirths": 176063,
+      "weight": 0.0013287427510095568,
+      "latitude": 52.13263320922851,
+      "longitude": 5.291265964508057
+    },
+    {
+      "m49": 430,
+      "iso3": "LBR",
+      "name": "Liberia",
+      "annualBirths": 174971,
+      "weight": 0.0013205014562224495,
+      "latitude": 6.4280548095703125,
+      "longitude": -9.429498672485352
+    },
+    {
+      "m49": 376,
+      "iso3": "ISR",
+      "name": "Israel",
+      "annualBirths": 171923,
+      "weight": 0.001297498281761733,
+      "latitude": 31.046051025390625,
+      "longitude": 34.85161209106445
+    },
+    {
+      "m49": 152,
+      "iso3": "CHL",
+      "name": "Chile",
+      "annualBirths": 169096,
+      "weight": 0.0012761629883888835,
+      "latitude": -35.675148010253906,
+      "longitude": -71.54296875
+    },
+    {
+      "m49": 418,
+      "iso3": "LAO",
+      "name": "Lao People's Democratic Republic",
+      "annualBirths": 160077,
+      "weight": 0.0012080968366627674,
+      "latitude": 19.85626983642578,
+      "longitude": 102.49549865722656
+    },
+    {
+      "m49": 788,
+      "iso3": "TUN",
+      "name": "Tunisia",
+      "annualBirths": 156979,
+      "weight": 0.0011847163135396375,
+      "latitude": 33.88691711425781,
+      "longitude": 9.53749942779541
+    },
+    {
+      "m49": 417,
+      "iso3": "KGZ",
+      "name": "Kyrgyzstan",
+      "annualBirths": 148668,
+      "weight": 0.001121993418873294,
+      "latitude": 41.20438003540039,
+      "longitude": 74.76609802246094
+    },
+    {
+      "m49": 795,
+      "iso3": "TKM",
+      "name": "Turkmenistan",
+      "annualBirths": 148664,
+      "weight": 0.001121963230980301,
+      "latitude": 38.96971893310547,
+      "longitude": 59.556278228759766
+    },
+    {
+      "m49": 275,
+      "iso3": "PSE",
+      "name": "State of Palestine",
+      "annualBirths": 144467,
+      "weight": 0.0010902885842573264,
+      "latitude": 31.95216178894043,
+      "longitude": 35.233154296875
+    },
+    {
+      "m49": 600,
+      "iso3": "PRY",
+      "name": "Paraguay",
+      "annualBirths": 134692,
+      "weight": 0.0010165169207555205,
+      "latitude": -23.442502975463867,
+      "longitude": -58.44383239746094
+    },
+    {
+      "m49": 558,
+      "iso3": "NIC",
+      "name": "Nicaragua",
+      "annualBirths": 131205,
+      "weight": 0.000990200625038815,
+      "latitude": 12.865415573120115,
+      "longitude": -85.20722961425781
+    },
+    {
+      "m49": 158,
+      "iso3": "TWN",
+      "name": "China, Taiwan Province of China",
+      "annualBirths": 122589,
+      "weight": 0.0009251759035317503,
+      "latitude": 23.69780921936035,
+      "longitude": 120.96051788330078
+    },
+    {
+      "m49": 31,
+      "iso3": "AZE",
+      "name": "Azerbaijan",
+      "annualBirths": 119620,
+      "weight": 0.0009027689399576468,
+      "latitude": 40.143104553222656,
+      "longitude": 47.576927185058594
+    },
+    {
+      "m49": 784,
+      "iso3": "ARE",
+      "name": "United Arab Emirates",
+      "annualBirths": 119325,
+      "weight": 0.0009005425828494082,
+      "latitude": 23.424076080322266,
+      "longitude": 53.84781646728515
+    },
+    {
+      "m49": 434,
+      "iso3": "LBY",
+      "name": "Libya",
+      "annualBirths": 118954,
+      "weight": 0.0008977426557743013,
+      "latitude": 26.335100173950195,
+      "longitude": 17.228330612182617
+    },
+    {
+      "m49": 232,
+      "iso3": "ERI",
+      "name": "Eritrea",
+      "annualBirths": 105398,
+      "weight": 0.0007954358864207998,
+      "latitude": 15.179384231567385,
+      "longitude": 39.78233337402344
+    },
+    {
+      "m49": 56,
+      "iso3": "BEL",
+      "name": "Belgium",
+      "annualBirths": 100860,
+      "weight": 0.000761187721820166,
+      "latitude": 50.50388717651367,
+      "longitude": 4.469935894012451
+    },
+    {
+      "m49": 222,
+      "iso3": "SLV",
+      "name": "El Salvador",
+      "annualBirths": 96922,
+      "weight": 0.0007314677411684923,
+      "latitude": 13.794184684753418,
+      "longitude": -88.89653015136719
+    },
+    {
+      "m49": 752,
+      "iso3": "SWE",
+      "name": "Sweden",
+      "annualBirths": 96301,
+      "weight": 0.0007267810707813188,
+      "latitude": 60.1281623840332,
+      "longitude": 18.64350128173828
+    },
+    {
+      "m49": 422,
+      "iso3": "LBN",
+      "name": "Lebanon",
+      "annualBirths": 92671,
+      "weight": 0.0006993855578901111,
+      "latitude": 33.85472106933594,
+      "longitude": 35.86228561401367
+    },
+    {
+      "m49": 192,
+      "iso3": "CUB",
+      "name": "Cuba",
+      "annualBirths": 92314,
+      "weight": 0.00069669128844048,
+      "latitude": 21.521757125854492,
+      "longitude": -77.78116607666016
+    },
+    {
+      "m49": 512,
+      "iso3": "OMN",
+      "name": "Oman",
+      "annualBirths": 90828,
+      "weight": 0.0006854764861935559,
+      "latitude": 21.512582778930664,
+      "longitude": 55.92325592041016
+    },
+    {
+      "m49": 620,
+      "iso3": "PRT",
+      "name": "Portugal",
+      "annualBirths": 85260,
+      "weight": 0.0006434549391472076,
+      "latitude": 39.399871826171875,
+      "longitude": -8.224453926086426
+    },
+    {
+      "m49": 203,
+      "iso3": "CZE",
+      "name": "Czechia",
+      "annualBirths": 83205,
+      "weight": 0.0006279459091220197,
+      "latitude": 49.8174934387207,
+      "longitude": 15.472962379455566
+    },
+    {
+      "m49": 348,
+      "iso3": "HUN",
+      "name": "Hungary",
+      "annualBirths": 83010,
+      "weight": 0.0006264742493386078,
+      "latitude": 47.16249465942382,
+      "longitude": 19.50330352783203
+    },
+    {
+      "m49": 270,
+      "iso3": "GMB",
+      "name": "Gambia",
+      "annualBirths": 82634,
+      "weight": 0.0006236365873972595,
+      "latitude": 13.443181991577148,
+      "longitude": -15.310138702392578
+    },
+    {
+      "m49": 756,
+      "iso3": "CHE",
+      "name": "Switzerland",
+      "annualBirths": 80644,
+      "weight": 0.0006086181106332091,
+      "latitude": 46.81818771362305,
+      "longitude": 8.22751235961914
+    },
+    {
+      "m49": 516,
+      "iso3": "NAM",
+      "name": "Namibia",
+      "annualBirths": 78927,
+      "weight": 0.0005956599575659354,
+      "latitude": -22.957639694213867,
+      "longitude": 18.49040985107422
+    },
+    {
+      "m49": 40,
+      "iso3": "AUT",
+      "name": "Austria",
+      "annualBirths": 74449,
+      "weight": 0.0005618646113601977,
+      "latitude": 47.516231536865234,
+      "longitude": 14.550071716308594
+    },
+    {
+      "m49": 591,
+      "iso3": "PAN",
+      "name": "Panama",
+      "annualBirths": 71573,
+      "weight": 0.000540159516298183,
+      "latitude": 8.537981033325195,
+      "longitude": -80.7821273803711
+    },
+    {
+      "m49": 266,
+      "iso3": "GAB",
+      "name": "Gabon",
+      "annualBirths": 69484,
+      "weight": 0.0005243938891825541,
+      "latitude": -0.8036890029907228,
+      "longitude": 11.60944366455078
+    },
+    {
+      "m49": 300,
+      "iso3": "GRC",
+      "name": "Greece",
+      "annualBirths": 67361,
+      "weight": 0.0005083716649764842,
+      "latitude": 39.0742073059082,
+      "longitude": 21.824312210083008
+    },
+    {
+      "m49": 624,
+      "iso3": "GNB",
+      "name": "Guinea-Bissau",
+      "annualBirths": 66031,
+      "weight": 0.0004983341905562897,
+      "latitude": 11.803749084472656,
+      "longitude": -15.180413246154783
+    },
+    {
+      "m49": 112,
+      "iso3": "BLR",
+      "name": "Belarus",
+      "annualBirths": 61280,
+      "weight": 0.0004624785206537753,
+      "latitude": 53.709808349609375,
+      "longitude": 27.953388214111328
+    },
+    {
+      "m49": 72,
+      "iso3": "BWA",
+      "name": "Botswana",
+      "annualBirths": 60884,
+      "weight": 0.0004594899192474617,
+      "latitude": -22.328474044799805,
+      "longitude": 24.68486595153809
+    },
+    {
+      "m49": 496,
+      "iso3": "MNG",
+      "name": "Mongolia",
+      "annualBirths": 60067,
+      "weight": 0.00045332404210362794,
+      "latitude": 46.86249542236328,
+      "longitude": 103.8466567993164
+    },
+    {
+      "m49": 208,
+      "iso3": "DNK",
+      "name": "Denmark",
+      "annualBirths": 59616,
+      "weight": 0.0004499203571686597,
+      "latitude": 56.263919830322266,
+      "longitude": 9.501785278320312
+    },
+    {
+      "m49": 100,
+      "iso3": "BGR",
+      "name": "Bulgaria",
+      "annualBirths": 59343,
+      "weight": 0.00044786003347188294,
+      "latitude": 42.733882904052734,
+      "longitude": 25.485830307006836
+    },
+    {
+      "m49": 554,
+      "iso3": "NZL",
+      "name": "New Zealand",
+      "annualBirths": 57999,
+      "weight": 0.00043771690142621264,
+      "latitude": -40.90055847167969,
+      "longitude": 174.88597106933594
+    },
+    {
+      "m49": 226,
+      "iso3": "GNQ",
+      "name": "Equatorial Guinea",
+      "annualBirths": 57895,
+      "weight": 0.00043693201620839293,
+      "latitude": 1.6508009433746338,
+      "longitude": 10.267894744873049
+    },
+    {
+      "m49": 688,
+      "iso3": "SRB",
+      "name": "Serbia",
+      "annualBirths": 57151,
+      "weight": 0.0004313170681116826,
+      "latitude": 44.01652145385742,
+      "longitude": 21.005859375
+    },
+    {
+      "m49": 426,
+      "iso3": "LSO",
+      "name": "Lesotho",
+      "annualBirths": 55312,
+      "weight": 0.00041743818430812037,
+      "latitude": -29.609987258911133,
+      "longitude": 28.23360824584961
+    },
+    {
+      "m49": 578,
+      "iso3": "NOR",
+      "name": "Norway",
+      "annualBirths": 53084,
+      "weight": 0.00040062352791098247,
+      "latitude": 60.472023010253906,
+      "longitude": 8.46894645690918
+    },
+    {
+      "m49": 372,
+      "iso3": "IRL",
+      "name": "Ireland",
+      "annualBirths": 52626,
+      "weight": 0.0003971670141632764,
+      "latitude": 53.41291046142578,
+      "longitude": -8.243889808654785
+    },
+    {
+      "m49": 702,
+      "iso3": "SGP",
+      "name": "Singapore",
+      "annualBirths": 50564,
+      "weight": 0.00038160515532535076,
+      "latitude": 1.3520829677581787,
+      "longitude": 103.81983947753906
+    },
+    {
+      "m49": 188,
+      "iso3": "CRI",
+      "name": "Costa Rica",
+      "annualBirths": 50203,
+      "weight": 0.0003788806979827265,
+      "latitude": 9.748916625976562,
+      "longitude": -83.75342559814453
+    },
+    {
+      "m49": 414,
+      "iso3": "KWT",
+      "name": "Kuwait",
+      "annualBirths": 49465,
+      "weight": 0.00037331103172550577,
+      "latitude": 29.31166076660156,
+      "longitude": 47.48176574707031
+    },
+    {
+      "m49": 703,
+      "iso3": "SVK",
+      "name": "Slovakia",
+      "annualBirths": 47925,
+      "weight": 0.00036168869292317526,
+      "latitude": 48.66902542114258,
+      "longitude": 19.699024200439453
+    },
+    {
+      "m49": 246,
+      "iso3": "FIN",
+      "name": "Finland",
+      "annualBirths": 43863,
+      "weight": 0.0003310328875887165,
+      "latitude": 61.924110412597656,
+      "longitude": 25.748151779174805
+    },
+    {
+      "m49": 268,
+      "iso3": "GEO",
+      "name": "Georgia",
+      "annualBirths": 41353,
+      "weight": 0.0003120899847355674,
+      "latitude": 42.315406799316406,
+      "longitude": 43.35689163208008
+    },
+    {
+      "m49": 344,
+      "iso3": "HKG",
+      "name": "China, Hong Kong SAR",
+      "annualBirths": 38112,
+      "weight": 0.0002876302444379354,
+      "latitude": 22.396427154541016,
+      "longitude": 114.1094970703125
+    },
+    {
+      "m49": 51,
+      "iso3": "ARM",
+      "name": "Armenia",
+      "annualBirths": 33694,
+      "weight": 0.0002542877166270937,
+      "latitude": 40.06909942626953,
+      "longitude": 45.03818893432618
+    },
+    {
+      "m49": 858,
+      "iso3": "URY",
+      "name": "Uruguay",
+      "annualBirths": 32873,
+      "weight": 0.00024809165159026686,
+      "latitude": -32.52277755737305,
+      "longitude": -55.76583480834961
+    },
+    {
+      "m49": 388,
+      "iso3": "JAM",
+      "name": "Jamaica",
+      "annualBirths": 31322,
+      "weight": 0.00023638629608220543,
+      "latitude": 18.109580993652344,
+      "longitude": -77.2975082397461
+    },
+    {
+      "m49": 634,
+      "iso3": "QAT",
+      "name": "Qatar",
+      "annualBirths": 30830,
+      "weight": 0.0002326731852440583,
+      "latitude": 25.354825973510746,
+      "longitude": 51.183883666992195
+    },
+    {
+      "m49": 626,
+      "iso3": "TLS",
+      "name": "Timor-Leste",
+      "annualBirths": 30774,
+      "weight": 0.00023225055474215535,
+      "latitude": -8.87421703338623,
+      "longitude": 125.7275390625
+    },
+    {
+      "m49": 191,
+      "iso3": "HRV",
+      "name": "Croatia",
+      "annualBirths": 30609,
+      "weight": 0.00023100530415619136,
+      "latitude": 45.099998474121094,
+      "longitude": 15.199999809265137
+    },
+    {
+      "m49": 498,
+      "iso3": "MDA",
+      "name": "Republic of Moldova",
+      "annualBirths": 29962,
+      "weight": 0.0002261224124645629,
+      "latitude": 47.4116325378418,
+      "longitude": 28.369884490966797
+    },
+    {
+      "m49": 748,
+      "iso3": "SWZ",
+      "name": "Eswatini",
+      "annualBirths": 29062,
+      "weight": 0.000219330136541123,
+      "latitude": -26.52250289916992,
+      "longitude": 31.465866088867188
+    },
+    {
+      "m49": 8,
+      "iso3": "ALB",
+      "name": "Albania",
+      "annualBirths": 26604,
+      "weight": 0.00020077967629688378,
+      "latitude": 41.1533317565918,
+      "longitude": 20.16833114624023
+    },
+    {
+      "m49": 174,
+      "iso3": "COM",
+      "name": "Comoros",
+      "annualBirths": 24599,
+      "weight": 0.0001856479949341093,
+      "latitude": -11.645500183105469,
+      "longitude": 43.33330154418945
+    },
+    {
+      "m49": 262,
+      "iso3": "DJI",
+      "name": "Djibouti",
+      "annualBirths": 24494,
+      "weight": 0.0001848555627430413,
+      "latitude": 11.825138092041016,
+      "longitude": 42.590274810791016
+    },
+    {
+      "m49": 70,
+      "iso3": "BIH",
+      "name": "Bosnia and Herzegovina",
+      "annualBirths": 24034,
+      "weight": 0.0001813839550488387,
+      "latitude": 43.91588592529297,
+      "longitude": 17.679075241088867
+    },
+    {
+      "m49": 90,
+      "iso3": "SLB",
+      "name": "Solomon Islands",
+      "annualBirths": 22440,
+      "weight": 0.00016935407969110179,
+      "latitude": -9.645709991455078,
+      "longitude": 160.15618896484375
+    },
+    {
+      "m49": 440,
+      "iso3": "LTU",
+      "name": "Lithuania",
+      "annualBirths": 21457,
+      "weight": 0.00016193540498805575,
+      "latitude": 55.169437408447266,
+      "longitude": 23.881275177001953
+    },
+    {
+      "m49": 48,
+      "iso3": "BHR",
+      "name": "Bahrain",
+      "annualBirths": 19865,
+      "weight": 0.00014992062357681538,
+      "latitude": 26.066699981689453,
+      "longitude": 50.55770111083984
+    },
+    {
+      "m49": 412,
+      "iso3": "XKX",
+      "name": "Kosovo (under UNSC res. 1244)",
+      "annualBirths": 19260,
+      "weight": 0.0001453547047616141,
+      "latitude": null,
+      "longitude": null
+    },
+    {
+      "m49": 630,
+      "iso3": "PRI",
+      "name": "Puerto Rico",
+      "annualBirths": 19121,
+      "weight": 0.00014430567548010505,
+      "latitude": 18.22964,
+      "longitude": -66.47373
+    },
+    {
+      "m49": 705,
+      "iso3": "SVN",
+      "name": "Slovenia",
+      "annualBirths": 16897,
+      "weight": 0.0001275212069759602,
+      "latitude": 46.151241302490234,
+      "longitude": 14.995463371276855
+    },
+    {
+      "m49": 242,
+      "iso3": "FJI",
+      "name": "Fiji",
+      "annualBirths": 16340,
+      "weight": 0.00012331754287667573,
+      "latitude": -17.71337127685547,
+      "longitude": 178.06503295898438
+    },
+    {
+      "m49": 328,
+      "iso3": "GUY",
+      "name": "Guyana",
+      "annualBirths": 16120,
+      "weight": 0.00012165720876205707,
+      "latitude": 4.860415935516357,
+      "longitude": -58.930179595947266
+    },
+    {
+      "m49": 807,
+      "iso3": "MKD",
+      "name": "North Macedonia",
+      "annualBirths": 16027,
+      "weight": 0.00012095534024996828,
+      "latitude": 41.60863494873047,
+      "longitude": 21.745275497436523
+    },
+    {
+      "m49": 780,
+      "iso3": "TTO",
+      "name": "Trinidad and Tobago",
+      "annualBirths": 15251,
+      "weight": 0.00011509888900931342,
+      "latitude": 10.691802978515623,
+      "longitude": -61.222503662109375
+    },
+    {
+      "m49": 196,
+      "iso3": "CYP",
+      "name": "Cyprus",
+      "annualBirths": 13687,
+      "weight": 0.00010329542284902452,
+      "latitude": 35.12641143798828,
+      "longitude": 33.42985916137695
+    },
+    {
+      "m49": 428,
+      "iso3": "LVA",
+      "name": "Latvia",
+      "annualBirths": 13328,
+      "weight": 0.00010058605945289682,
+      "latitude": 56.879634857177734,
+      "longitude": 24.60318946838379
+    },
+    {
+      "m49": 175,
+      "iso3": "MYT",
+      "name": "Mayotte",
+      "annualBirths": 11466,
+      "weight": 0.00008653359526462446,
+      "latitude": -12.827500343322754,
+      "longitude": 45.16624450683594
+    },
+    {
+      "m49": 638,
+      "iso3": "REU",
+      "name": "Réunion",
+      "annualBirths": 11325,
+      "weight": 0.00008546947203661888,
+      "latitude": -21.115140914916992,
+      "longitude": 55.53638458251953
+    },
+    {
+      "m49": 480,
+      "iso3": "MUS",
+      "name": "Mauritius",
+      "annualBirths": 11254,
+      "weight": 0.00008493363693599195,
+      "latitude": -20.348403930664062,
+      "longitude": 57.55215072631836
+    },
+    {
+      "m49": 740,
+      "iso3": "SUR",
+      "name": "Suriname",
+      "annualBirths": 10815,
+      "weight": 0.00008162051568000293,
+      "latitude": 3.919305086135864,
+      "longitude": -56.02778244018555
+    },
+    {
+      "m49": 233,
+      "iso3": "EST",
+      "name": "Estonia",
+      "annualBirths": 10156,
+      "weight": 0.00007664706030939527,
+      "latitude": 58.595272064208984,
+      "longitude": 25.013607025146484
+    },
+    {
+      "m49": 64,
+      "iso3": "BTN",
+      "name": "Bhutan",
+      "annualBirths": 9783,
+      "weight": 0.00007383203928779183,
+      "latitude": 27.514162063598633,
+      "longitude": 90.43360137939453
+    },
+    {
+      "m49": 548,
+      "iso3": "VUT",
+      "name": "Vanuatu",
+      "annualBirths": 9193,
+      "weight": 0.00006937932507131455,
+      "latitude": -15.376706123352053,
+      "longitude": 166.9591522216797
+    },
+    {
+      "m49": 732,
+      "iso3": "ESH",
+      "name": "Western Sahara",
+      "annualBirths": 9008,
+      "weight": 0.00006798313502038524,
+      "latitude": 24.215526580810547,
+      "longitude": -12.885833740234377
+    },
+    {
+      "m49": 254,
+      "iso3": "GUF",
+      "name": "French Guiana",
+      "annualBirths": 7560,
+      "weight": 0.000057055117756895254,
+      "latitude": 3.933888912200928,
+      "longitude": -53.12578201293945
+    },
+    {
+      "m49": 84,
+      "iso3": "BLZ",
+      "name": "Belize",
+      "annualBirths": 7471,
+      "weight": 0.00005638343713779953,
+      "latitude": 17.189876556396484,
+      "longitude": -88.49765014648438
+    },
+    {
+      "m49": 442,
+      "iso3": "LUX",
+      "name": "Luxembourg",
+      "annualBirths": 6943,
+      "weight": 0.00005239863526271478,
+      "latitude": 49.81527328491211,
+      "longitude": 6.12958288192749
+    },
+    {
+      "m49": 678,
+      "iso3": "STP",
+      "name": "Sao Tome and Principe",
+      "annualBirths": 6777,
+      "weight": 0.00005114583770350253,
+      "latitude": 0.18636000156402588,
+      "longitude": 6.613080978393555
+    },
+    {
+      "m49": 499,
+      "iso3": "MNE",
+      "name": "Montenegro",
+      "annualBirths": 6694,
+      "weight": 0.0000505194389238964,
+      "latitude": 42.70867919921875,
+      "longitude": 19.3743896484375
+    },
+    {
+      "m49": 132,
+      "iso3": "CPV",
+      "name": "Cabo Verde",
+      "annualBirths": 6330,
+      "weight": 0.00004777234066152737,
+      "latitude": 15.120141983032228,
+      "longitude": -23.60517311096191
+    },
+    {
+      "m49": 96,
+      "iso3": "BRN",
+      "name": "Brunei Darussalam",
+      "annualBirths": 5974,
+      "weight": 0.00004508561818514448,
+      "latitude": 4.535276889801025,
+      "longitude": 114.72766876220705
+    },
+    {
+      "m49": 882,
+      "iso3": "WSM",
+      "name": "Samoa",
+      "annualBirths": 5373,
+      "weight": 0.000040549887262936266,
+      "latitude": -13.759029388427734,
+      "longitude": -172.10462951660156
+    },
+    {
+      "m49": 462,
+      "iso3": "MDV",
+      "name": "Maldives",
+      "annualBirths": 5224,
+      "weight": 0.00003942538824894455,
+      "latitude": 1.977246880531311,
+      "longitude": 73.5361099243164
+    },
+    {
+      "m49": 446,
+      "iso3": "MAC",
+      "name": "China, Macao SAR",
+      "annualBirths": 4437,
+      "weight": 0.00003348592030255876,
+      "latitude": 22.198745727539062,
+      "longitude": 113.54387664794922
+    },
+    {
+      "m49": 352,
+      "iso3": "ISL",
+      "name": "Iceland",
+      "annualBirths": 4346,
+      "weight": 0.0000327991457369665,
+      "latitude": 64.96305084228516,
+      "longitude": -19.020835876464844
+    },
+    {
+      "m49": 44,
+      "iso3": "BHS",
+      "name": "Bahamas",
+      "annualBirths": 4268,
+      "weight": 0.00003221048182360171,
+      "latitude": 25.03428077697754,
+      "longitude": -77.39627838134764
+    },
+    {
+      "m49": 470,
+      "iso3": "MLT",
+      "name": "Malta",
+      "annualBirths": 4222,
+      "weight": 0.000031863321054181446,
+      "latitude": 35.937496185302734,
+      "longitude": 14.375415802001951
+    },
+    {
+      "m49": 540,
+      "iso3": "NCL",
+      "name": "New Caledonia",
+      "annualBirths": 4038,
+      "weight": 0.0000304746779765004,
+      "latitude": -20.90430450439453,
+      "longitude": 165.6180419921875
+    },
+    {
+      "m49": 312,
+      "iso3": "GLP",
+      "name": "Guadeloupe",
+      "annualBirths": 3854,
+      "weight": 0.00002908603489881935,
+      "latitude": 16.17588,
+      "longitude": -61.66461
+    },
+    {
+      "m49": 296,
+      "iso3": "KIR",
+      "name": "Kiribati",
+      "annualBirths": 3370,
+      "weight": 0.000025433299846658335,
+      "latitude": 1.8708833456039429,
+      "longitude": -157.36302185058594
+    },
+    {
+      "m49": 474,
+      "iso3": "MTQ",
+      "name": "Martinique",
+      "annualBirths": 3248,
+      "weight": 0.00002451256911036981,
+      "latitude": 14.63115,
+      "longitude": -61.02442
+    },
+    {
+      "m49": 52,
+      "iso3": "BRB",
+      "name": "Barbados",
+      "annualBirths": 3107,
+      "weight": 0.000023448445882364227,
+      "latitude": 13.16705,
+      "longitude": -59.55643
+    },
+    {
+      "m49": 258,
+      "iso3": "PYF",
+      "name": "French Polynesia",
+      "annualBirths": 2916,
+      "weight": 0.000022006973991945313,
+      "latitude": -17.67974281311035,
+      "longitude": -149.40684509277344
+    },
+    {
+      "m49": 316,
+      "iso3": "GUM",
+      "name": "Guam",
+      "annualBirths": 2851,
+      "weight": 0.000021516420730807986,
+      "latitude": 13.44430446624756,
+      "longitude": 144.79373168945312
+    },
+    {
+      "m49": 583,
+      "iso3": "FSM",
+      "name": "Micronesia (Fed. States of)",
+      "annualBirths": 2509,
+      "weight": 0.00001893535587990082,
+      "latitude": 6.887481212615967,
+      "longitude": 158.21507263183594
+    },
+    {
+      "m49": 776,
+      "iso3": "TON",
+      "name": "Tonga",
+      "annualBirths": 2339,
+      "weight": 0.000017652370427695502,
+      "latitude": -21.178985595703125,
+      "longitude": -175.1982421875
+    },
+    {
+      "m49": 662,
+      "iso3": "LCA",
+      "name": "Saint Lucia",
+      "annualBirths": 1959,
+      "weight": 0.000014784520593354206,
+      "latitude": 13.9066,
+      "longitude": -60.96665
+    },
+    {
+      "m49": 690,
+      "iso3": "SYC",
+      "name": "Seychelles",
+      "annualBirths": 1786,
+      "weight": 0.00001347889422140409,
+      "latitude": -4.679574012756348,
+      "longitude": 55.49197769165039
+    },
+    {
+      "m49": 531,
+      "iso3": "CUW",
+      "name": "Curaçao",
+      "annualBirths": 1400,
+      "weight": 0.000010565762547573194,
+      "latitude": 12.169569969177246,
+      "longitude": -68.99002075195312
+    },
+    {
+      "m49": 308,
+      "iso3": "GRD",
+      "name": "Grenada",
+      "annualBirths": 1296,
+      "weight": 0.000009780877329753472,
+      "latitude": 12.09227,
+      "longitude": -61.68982
+    },
+    {
+      "m49": 670,
+      "iso3": "VCT",
+      "name": "Saint Vincent and the Grenadines",
+      "annualBirths": 1157,
+      "weight": 0.00000873184804824442,
+      "latitude": 13.24775,
+      "longitude": -61.19134
+    },
+    {
+      "m49": 28,
+      "iso3": "ATG",
+      "name": "Antigua and Barbuda",
+      "annualBirths": 1079,
+      "weight": 0.000008143184134879627,
+      "latitude": 17.07867,
+      "longitude": -61.78918
+    },
+    {
+      "m49": 533,
+      "iso3": "ABW",
+      "name": "Aruba",
+      "annualBirths": 1025,
+      "weight": 0.000007735647579473231,
+      "latitude": 12.521109580993652,
+      "longitude": -69.96833801269531
+    },
+    {
+      "m49": 850,
+      "iso3": "VIR",
+      "name": "United States Virgin Islands",
+      "annualBirths": 909,
+      "weight": 0.00000686019868267431,
+      "latitude": 17.74046,
+      "longitude": -64.77552
+    },
+    {
+      "m49": 832,
+      "iso3": "JEY",
+      "name": "Jersey",
+      "annualBirths": 844,
+      "weight": 0.000006369645421536984,
+      "latitude": null,
+      "longitude": null
+    },
+    {
+      "m49": 136,
+      "iso3": "CYM",
+      "name": "Cayman Islands",
+      "annualBirths": 843,
+      "weight": 0.000006362098448288717,
+      "latitude": 19.31329917907715,
+      "longitude": -81.25460052490233
+    },
+    {
+      "m49": 234,
+      "iso3": "FRO",
+      "name": "Faroe Islands",
+      "annualBirths": 726,
+      "weight": 0.0000054791025782415285,
+      "latitude": 61.892635345458984,
+      "longitude": -6.911806106567383
+    },
+    {
+      "m49": 304,
+      "iso3": "GRL",
+      "name": "Greenland",
+      "annualBirths": 714,
+      "weight": 0.000005388538899262329,
+      "latitude": 71.70693969726562,
+      "longitude": -42.60430145263672
+    },
+    {
+      "m49": 212,
+      "iso3": "DMA",
+      "name": "Dominica",
+      "annualBirths": 700,
+      "weight": 0.000005282881273786597,
+      "latitude": 15.414999008178713,
+      "longitude": -61.370975494384766
+    },
+    {
+      "m49": 584,
+      "iso3": "MHL",
+      "name": "Marshall Islands",
+      "annualBirths": 682,
+      "weight": 0.000005147035755317799,
+      "latitude": 6.068301677703857,
+      "longitude": 171.9893798828125
+    },
+    {
+      "m49": 833,
+      "iso3": "IMN",
+      "name": "Isle of Man",
+      "annualBirths": 682,
+      "weight": 0.000005147035755317799,
+      "latitude": 54.236106872558594,
+      "longitude": -4.548056125640869
+    },
+    {
+      "m49": 16,
+      "iso3": "ASM",
+      "name": "American Samoa",
+      "annualBirths": 657,
+      "weight": 0.0000049583614241111355,
+      "latitude": -14.306020736694336,
+      "longitude": -170.69618225097656
+    },
+    {
+      "m49": 20,
+      "iso3": "AND",
+      "name": "Andorra",
+      "annualBirths": 575,
+      "weight": 0.000004339509617753277,
+      "latitude": 42.50628662109375,
+      "longitude": 1.5218009948730469
+    },
+    {
+      "m49": 659,
+      "iso3": "KNA",
+      "name": "Saint Kitts and Nevis",
+      "annualBirths": 528,
+      "weight": 0.000003984801875084748,
+      "latitude": 17.35782241821289,
+      "longitude": -62.782997131347656
+    },
+    {
+      "m49": 831,
+      "iso3": "GGY",
+      "name": "Guernsey",
+      "annualBirths": 524,
+      "weight": 0.0000039546139820916815,
+      "latitude": null,
+      "longitude": null
+    },
+    {
+      "m49": 292,
+      "iso3": "GIB",
+      "name": "Gibraltar",
+      "annualBirths": 502,
+      "weight": 0.000003788580570629817,
+      "latitude": 36.140750885009766,
+      "longitude": -5.3535847663879395
+    },
+    {
+      "m49": 60,
+      "iso3": "BMU",
+      "name": "Bermuda",
+      "annualBirths": 500,
+      "weight": 0.0000037734866241332837,
+      "latitude": 32.30780029296875,
+      "longitude": -64.75050354003906
+    },
+    {
+      "m49": 796,
+      "iso3": "TCA",
+      "name": "Turks and Caicos Islands",
+      "annualBirths": 479,
+      "weight": 0.0000036150001859196858,
+      "latitude": 21.69402503967285,
+      "longitude": -71.79792785644531
+    },
+    {
+      "m49": 580,
+      "iso3": "MNP",
+      "name": "Northern Mariana Islands",
+      "annualBirths": 468,
+      "weight": 0.0000035319834801887537,
+      "latitude": 15.097900390625,
+      "longitude": 145.6739044189453
+    },
+    {
+      "m49": 534,
+      "iso3": "SXM",
+      "name": "Sint Maarten (Dutch part)",
+      "annualBirths": 398,
+      "weight": 0.000003003695352810094,
+      "latitude": 18.04248046875,
+      "longitude": -63.054828643798835
+    },
+    {
+      "m49": 438,
+      "iso3": "LIE",
+      "name": "Liechtenstein",
+      "annualBirths": 370,
+      "weight": 0.00000279238010185863,
+      "latitude": 47.16600036621094,
+      "longitude": 9.555373191833496
+    },
+    {
+      "m49": 492,
+      "iso3": "MCO",
+      "name": "Monaco",
+      "annualBirths": 369,
+      "weight": 0.0000027848331286103634,
+      "latitude": 43.73841857910156,
+      "longitude": 7.424615859985352
+    },
+    {
+      "m49": 92,
+      "iso3": "VGB",
+      "name": "British Virgin Islands",
+      "annualBirths": 321,
+      "weight": 0.0000024225784126935683,
+      "latitude": 18.42069435119629,
+      "longitude": -64.63996887207031
+    },
+    {
+      "m49": 535,
+      "iso3": "BES",
+      "name": "Bonaire, Sint Eustatius and Saba",
+      "annualBirths": 299,
+      "weight": 0.0000022565450012317037,
+      "latitude": 12.17836093902588,
+      "longitude": -68.23853302001953
+    },
+    {
+      "m49": 663,
+      "iso3": "MAF",
+      "name": "Saint Martin (French part)",
+      "annualBirths": 287,
+      "weight": 0.000002165981322252505,
+      "latitude": null,
+      "longitude": null
+    },
+    {
+      "m49": 520,
+      "iso3": "NRO",
+      "name": "Republic of Naoero",
+      "annualBirths": 286,
+      "weight": 0.0000021584343490042385,
+      "latitude": -0.5227779746055603,
+      "longitude": 166.93150329589844
+    },
+    {
+      "m49": 674,
+      "iso3": "SMR",
+      "name": "San Marino",
+      "annualBirths": 195,
+      "weight": 0.0000014716597834119807,
+      "latitude": 43.942359924316406,
+      "longitude": 12.45777702331543
+    },
+    {
+      "m49": 798,
+      "iso3": "TUV",
+      "name": "Tuvalu",
+      "annualBirths": 192,
+      "weight": 0.0000014490188636671811,
+      "latitude": -7.478420734405517,
+      "longitude": 178.67991638183594
+    },
+    {
+      "m49": 585,
+      "iso3": "PLW",
+      "name": "Palau",
+      "annualBirths": 184,
+      "weight": 0.0000013886430776810484,
+      "latitude": 7.51497983932495,
+      "longitude": 134.58251953125
+    },
+    {
+      "m49": 660,
+      "iso3": "AIA",
+      "name": "Anguilla",
+      "annualBirths": 137,
+      "weight": 0.0000010339353350125197,
+      "latitude": 18.22055435180664,
+      "longitude": -63.0686149597168
+    },
+    {
+      "m49": 184,
+      "iso3": "COK",
+      "name": "Cook Islands",
+      "annualBirths": 133,
+      "weight": 0.0000010037474420194536,
+      "latitude": -21.236736297607425,
+      "longitude": -159.7776641845703
+    },
+    {
+      "m49": 876,
+      "iso3": "WLF",
+      "name": "Wallis and Futuna Islands",
+      "annualBirths": 95,
+      "weight": 7.16962458585324e-7,
+      "latitude": -14.293800354003906,
+      "longitude": -178.1165008544922
+    },
+    {
+      "m49": 652,
+      "iso3": "BLM",
+      "name": "Saint Barthélemy",
+      "annualBirths": 62,
+      "weight": 4.679123413925272e-7,
+      "latitude": null,
+      "longitude": null
+    },
+    {
+      "m49": 772,
+      "iso3": "TKL",
+      "name": "Tokelau",
+      "annualBirths": 55,
+      "weight": 4.1508352865466125e-7,
+      "latitude": -9.200200080871582,
+      "longitude": -171.84840393066406
+    },
+    {
+      "m49": 654,
+      "iso3": "SHN",
+      "name": "Saint Helena",
+      "annualBirths": 37,
+      "weight": 2.79238010185863e-7,
+      "latitude": -15.96560001373291,
+      "longitude": -5.711528301239014
+    },
+    {
+      "m49": 500,
+      "iso3": "MSR",
+      "name": "Montserrat",
+      "annualBirths": 36,
+      "weight": 2.7169103693759646e-7,
+      "latitude": 16.74249839782715,
+      "longitude": -62.1873664855957
+    },
+    {
+      "m49": 238,
+      "iso3": "FLK",
+      "name": "Falkland Islands (Malvinas)",
+      "annualBirths": 34,
+      "weight": 2.5659709044106333e-7,
+      "latitude": -51.7962532043457,
+      "longitude": -59.52361297607422
+    },
+    {
+      "m49": 666,
+      "iso3": "SPM",
+      "name": "Saint Pierre and Miquelon",
+      "annualBirths": 29,
+      "weight": 2.1886222419973046e-7,
+      "latitude": 46.88520050048828,
+      "longitude": -56.31589889526367
+    },
+    {
+      "m49": 570,
+      "iso3": "NIU",
+      "name": "Niue",
+      "annualBirths": 27,
+      "weight": 2.0376827770319733e-7,
+      "latitude": -19.054445266723633,
+      "longitude": -169.8672332763672
+    }
+  ]
+}

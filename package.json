@@ -1,0 +1,36 @@
+{
+  "name": "hello-world",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "data:download": "bash scripts/download-un-data.sh",
+    "prepare-data": "tsx scripts/prepare-birth-data.ts",
+    "build": "tsx scripts/prepare-birth-data.ts && tsc -b && vite build",
+    "test": "vitest run",
+    "validate": "tsx scripts/prepare-birth-data.ts && vitest run",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "d3-geo": "^3.1.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "topojson-client": "^3.1.0",
+    "world-atlas": "^2.0.2"
+  },
+  "devDependencies": {
+    "@types/d3-geo": "^3.1.0",
+    "@types/geojson": "^7946.0.14",
+    "@types/node": "^22.5.0",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@types/topojson-client": "^3.1.4",
+    "@vitejs/plugin-react": "^4.3.1",
+    "jsdom": "^24.1.1",
+    "tsx": "^4.16.2",
+    "typescript": "^5.5.4",
+    "vite": "^5.4.2",
+    "vitest": "^2.0.5"
+  }
+}

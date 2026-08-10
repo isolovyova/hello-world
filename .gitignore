@@ -1,0 +1,12 @@
+node_modules/
+.pnpm-store/
+dist/
+.DS_Store
+*.tsbuildinfo
+
+# Synced ChatGPT-project and local QA artifacts; not part of this repository.
+sources/
+working/
+bridge/
+.DS_Store
+*.tsbuildinfo
