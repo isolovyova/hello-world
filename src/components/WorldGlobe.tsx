@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef } from 'react';
 import { geoDistance, geoGraticule10, geoOrthographic, geoPath } from 'd3-geo';
-import { getAllCountryGeometries } from '../data/countryGeometries';
+import { getAllCountryGeometries, getCountryBorders } from '../data/countryGeometries';
 import type { BirthEvent } from '../types';
 
 type WorldGlobeProps = {
@@ -17,88 +17,40 @@ type Viewport = {
 type Star = {
   x: number;
   y: number;
-  size: number;
+  radius: number;
   opacity: number;
+  speed: number;
+  phase: number;
 };
 
 type City = [longitude: number, latitude: number];
 
-const FULL_ROTATION_MS = 120_000;
-const POINT_LIFETIME_SECONDS = 5.5;
-const STAR_COUNT = 34;
+/** Degrees of rotation per millisecond — a full turn takes a little over three minutes. */
+const ROTATION_DEGREES_PER_MS = 0.0017;
+const MAX_FRAME_DELTA_MS = 100;
+const POINT_LIFETIME_SECONDS = 2.6;
+/** One star per this many square pixels of viewport. */
+const STAR_AREA_PER_STAR = 5200;
 
 // These are decorative night-Earth lights. They are not birth data or a geographic claim.
 const NIGHT_LIGHTS: readonly City[] = [
-  [77.2, 28.6],
-  [72.8, 19.1],
-  [116.4, 39.9],
-  [121.5, 31.2],
-  [139.7, 35.7],
-  [126.9, 37.6],
-  [31.2, 30],
-  [28.9, 41],
-  [3.4, 6.5],
-  [18.4, -33.9],
-  [-74, 40.7],
-  [-87.6, 41.9],
-  [-118.2, 34.1],
-  [-99.1, 19.4],
-  [-46.6, -23.6],
-  [-58.4, -34.6],
-  [2.3, 48.9],
-  [12.5, 41.9],
-  [4.9, 52.4],
-  [37.6, 55.8],
-  [28, -26.2],
-  [151.2, -33.9],
-  [144.9, -37.8],
-  [103.8, 1.4],
-  [106.8, -6.2],
-  [72.9, 19.1],
-  [80.3, 13.1],
-];
-
-const STARS: readonly Star[] = [
-  { x: 0.08, y: 0.18, size: 2.3, opacity: 0.54 },
-  { x: 0.14, y: 0.72, size: 1.5, opacity: 0.42 },
-  { x: 0.2, y: 0.1, size: 1.1, opacity: 0.55 },
-  { x: 0.25, y: 0.84, size: 2.1, opacity: 0.4 },
-  { x: 0.34, y: 0.17, size: 1.1, opacity: 0.5 },
-  { x: 0.39, y: 0.9, size: 1.4, opacity: 0.36 },
-  { x: 0.48, y: 0.12, size: 2.4, opacity: 0.5 },
-  { x: 0.56, y: 0.78, size: 1.3, opacity: 0.4 },
-  { x: 0.64, y: 0.19, size: 1.1, opacity: 0.52 },
-  { x: 0.7, y: 0.9, size: 1.8, opacity: 0.4 },
-  { x: 0.78, y: 0.11, size: 1.5, opacity: 0.5 },
-  { x: 0.86, y: 0.7, size: 2.1, opacity: 0.42 },
-  { x: 0.92, y: 0.24, size: 1.3, opacity: 0.48 },
-  { x: 0.1, y: 0.48, size: 1.1, opacity: 0.32 },
-  { x: 0.28, y: 0.3, size: 1.4, opacity: 0.34 },
-  { x: 0.45, y: 0.33, size: 1, opacity: 0.3 },
-  { x: 0.59, y: 0.47, size: 1.5, opacity: 0.35 },
-  { x: 0.74, y: 0.36, size: 1.1, opacity: 0.33 },
-  { x: 0.9, y: 0.52, size: 1.2, opacity: 0.32 },
-  { x: 0.17, y: 0.92, size: 1, opacity: 0.26 },
-  { x: 0.32, y: 0.06, size: 0.9, opacity: 0.35 },
-  { x: 0.52, y: 0.92, size: 1, opacity: 0.3 },
-  { x: 0.68, y: 0.07, size: 0.9, opacity: 0.36 },
-  { x: 0.82, y: 0.83, size: 0.8, opacity: 0.3 },
-  { x: 0.97, y: 0.84, size: 1.1, opacity: 0.3 },
-  { x: 0.04, y: 0.9, size: 0.8, opacity: 0.28 },
-  { x: 0.37, y: 0.63, size: 0.9, opacity: 0.32 },
-  { x: 0.61, y: 0.28, size: 0.8, opacity: 0.3 },
-  { x: 0.77, y: 0.58, size: 0.9, opacity: 0.3 },
-  { x: 0.95, y: 0.44, size: 0.8, opacity: 0.28 },
-  { x: 0.05, y: 0.35, size: 0.7, opacity: 0.26 },
-  { x: 0.88, y: 0.94, size: 0.9, opacity: 0.25 },
-  { x: 0.23, y: 0.57, size: 0.8, opacity: 0.27 },
-  { x: 0.71, y: 0.75, size: 0.7, opacity: 0.25 },
+  [139.7, 35.7], [121.5, 31.2], [77.2, 28.6], [72.9, 19.1], [31.2, 30.0], [90.4, 23.8],
+  [116.4, 39.9], [-99.1, 19.4], [-46.6, -23.5], [67.0, 24.9], [3.4, 6.5], [55.3, 25.2],
+  [37.6, 55.8], [-58.4, -34.6], [2.35, 48.9], [-0.13, 51.5], [-74.0, 40.7], [-118.2, 34.1],
+  [-87.6, 41.9], [-43.2, -22.9], [126.98, 37.57], [106.8, -6.2], [100.5, 13.75], [13.4, 52.5],
+  [12.5, 41.9], [28.98, 41.0], [35.2, 31.8], [44.4, 33.3], [51.4, 35.7], [18.4, -33.9],
+  [36.8, -1.3], [7.5, 9.06], [-3.7, 40.4], [151.2, -33.9], [174.8, -36.9], [103.8, 1.35],
+  [114.2, 22.3], [120.98, 14.6], [-79.4, 43.7], [-123.1, 49.3], [-70.7, -33.5], [-77.05, -12.05],
+  [-84.4, 33.75], [-95.4, 29.8], [30.5, 50.45], [24.9, 60.2], [10.75, 59.9], [105.85, 21.03],
+  [113.3, 23.1], [78.5, 17.4], [80.3, 13.1], [88.4, 22.6], [74.3, 31.5], [68.4, 25.4],
+  [38.7, 9.0], [32.6, 0.3], [13.2, -8.8], [-15.6, 11.9], [-8.0, 12.6], [47.5, -18.9],
+  [46.7, 24.7],
 ];
 
 function getViewport(element?: HTMLElement | null): Viewport {
   const rect = element?.getBoundingClientRect();
   const fallbackWidth = typeof window === 'undefined' ? 1024 : window.innerWidth;
-  const fallbackHeight = typeof window === 'undefined' ? 460 : window.innerHeight * 0.66;
+  const fallbackHeight = typeof window === 'undefined' ? 460 : window.innerHeight;
 
   return {
     width: Math.max(rect?.width ?? fallbackWidth, 320),
@@ -107,81 +59,42 @@ function getViewport(element?: HTMLElement | null): Viewport {
   };
 }
 
-function getPointOpacity(ageSeconds: number, reducedMotion: boolean): number {
-  const fadeIn = reducedMotion ? 0.1 : 0.25;
-  const hold = reducedMotion ? 0.6 : 1.5;
-  const fadeOut = reducedMotion ? 0.9 : 3.5;
+function makeStars(width: number, height: number): Star[] {
+  const count = Math.round((width * height) / STAR_AREA_PER_STAR);
+  const stars: Star[] = [];
 
-  if (ageSeconds < 0 || ageSeconds > fadeIn + hold + fadeOut) {
-    return 0;
+  for (let index = 0; index < count; index += 1) {
+    stars.push({
+      x: Math.random(),
+      y: Math.random(),
+      // Squaring the random keeps most stars small and a few noticeably brighter.
+      radius: Math.random() * Math.random() * 1.5 + 0.25,
+      opacity: 0.18 + Math.random() * 0.65,
+      speed: 0.4 + Math.random() * 1.6,
+      phase: Math.random() * Math.PI * 2,
+    });
   }
-  if (ageSeconds < fadeIn) {
-    return ageSeconds / fadeIn;
-  }
-  if (ageSeconds < fadeIn + hold) {
-    return 1;
-  }
-  return Math.max(0, 1 - (ageSeconds - fadeIn - hold) / fadeOut);
+
+  return stars;
 }
 
-function drawCross(ctx: CanvasRenderingContext2D, x: number, y: number, size: number, opacity: number) {
-  ctx.save();
-  ctx.strokeStyle = `rgba(178, 222, 232, ${opacity})`;
-  ctx.lineWidth = Math.max(0.55, size * 0.18);
-  ctx.lineCap = 'round';
-  ctx.beginPath();
-  ctx.moveTo(x, y - size * 2.1);
-  ctx.lineTo(x, y + size * 2.1);
-  ctx.moveTo(x - size * 1.4, y);
-  ctx.lineTo(x + size * 1.4, y);
-  ctx.stroke();
-  ctx.restore();
-}
-
-function drawBackground(ctx: CanvasRenderingContext2D, width: number, height: number, time: number) {
-  const background = ctx.createRadialGradient(width * 0.5, height * 0.32, 0, width * 0.5, height * 0.38, Math.max(width, height));
-  background.addColorStop(0, '#071a2b');
-  background.addColorStop(0.34, '#041323');
-  background.addColorStop(1, '#020711');
-  ctx.fillStyle = background;
-  ctx.fillRect(0, 0, width, height);
-
-  for (const [index, star] of STARS.entries()) {
-    const twinkle = 0.84 + Math.sin(time * (0.35 + (index % 4) * 0.08) + index) * 0.16;
-    const x = star.x * width;
-    const y = star.y * height;
-    if (star.size > 1.6) {
-      drawCross(ctx, x, y, star.size, star.opacity * twinkle);
-    } else {
-      ctx.fillStyle = `rgba(223, 240, 255, ${star.opacity * twinkle})`;
-      ctx.beginPath();
-      ctx.arc(x, y, star.size * 0.55, 0, Math.PI * 2);
-      ctx.fill();
-    }
+function drawStars(
+  ctx: CanvasRenderingContext2D,
+  stars: readonly Star[],
+  width: number,
+  height: number,
+  time: number,
+  reducedMotion: boolean,
+) {
+  ctx.fillStyle = '#dff0ff';
+  for (const star of stars) {
+    const twinkle = reducedMotion ? 1 : 0.6 + 0.4 * Math.sin(time * star.speed + star.phase);
+    ctx.globalAlpha = Math.max(0, star.opacity * twinkle);
+    ctx.beginPath();
+    ctx.arc(star.x * width, star.y * height, star.radius, 0, Math.PI * 2);
+    ctx.fill();
   }
-}
-
-function drawOrbits(ctx: CanvasRenderingContext2D, centerX: number, centerY: number, radius: number) {
-  ctx.save();
-  ctx.translate(centerX, centerY);
-  ctx.rotate((-17 * Math.PI) / 180);
-  ctx.strokeStyle = 'rgba(141, 223, 225, 0.28)';
-  ctx.lineWidth = 1;
-  ctx.beginPath();
-  ctx.ellipse(0, 0, radius * 1.2, radius * 0.31, 0, 0, Math.PI * 2);
-  ctx.stroke();
-  ctx.restore();
-
-  ctx.save();
-  ctx.translate(centerX, centerY);
-  ctx.rotate((23 * Math.PI) / 180);
-  ctx.strokeStyle = 'rgba(226, 180, 88, 0.22)';
-  ctx.lineWidth = 0.8;
-  ctx.setLineDash([2, 12]);
-  ctx.beginPath();
-  ctx.ellipse(0, 0, radius * 1.16, radius * 0.24, 0, 0, Math.PI * 2);
-  ctx.stroke();
-  ctx.restore();
+  ctx.globalAlpha = 1;
 }
 
 function drawCityLights(
@@ -192,6 +105,7 @@ function drawCityLights(
   centerY: number,
   radius: number,
   time: number,
+  reducedMotion: boolean,
 ) {
   for (const [index, [longitude, latitude]] of NIGHT_LIGHTS.entries()) {
     const projected = projection([longitude, latitude]);
@@ -201,21 +115,24 @@ function drawCityLights(
 
     const dx = (projected[0] - centerX) / radius;
     const dy = (projected[1] - centerY) / radius;
+    // Fade towards the limb, and brighten on the night side (lower-right).
     const depth = 1 - Math.min(1, Math.hypot(dx, dy));
     const night = Math.min(1, Math.max(0, dx * 0.7 + dy * 0.7 + 0.55));
-    const twinkle = 0.78 + 0.22 * Math.sin(time * 1.2 + index);
-    const opacity = depth * (0.16 + 0.66 * night) * twinkle;
+    const twinkle = reducedMotion ? 1 : 0.72 + 0.28 * Math.sin(time * 1.4 + index);
+    const opacity = depth * 0.9 * (0.25 + 0.75 * night) * twinkle;
     if (opacity <= 0.02) {
       continue;
     }
 
-    const glow = ctx.createRadialGradient(projected[0], projected[1], 0, projected[0], projected[1], 5.5);
-    glow.addColorStop(0, `rgba(255, 232, 170, ${opacity})`);
+    ctx.globalAlpha = opacity;
+    const glow = ctx.createRadialGradient(projected[0], projected[1], 0, projected[0], projected[1], 3.6);
+    glow.addColorStop(0, 'rgba(255, 232, 170, 0.95)');
     glow.addColorStop(1, 'rgba(255, 210, 120, 0)');
     ctx.fillStyle = glow;
     ctx.beginPath();
-    ctx.arc(projected[0], projected[1], 5.5, 0, Math.PI * 2);
+    ctx.arc(projected[0], projected[1], 3.6, 0, Math.PI * 2);
     ctx.fill();
+    ctx.globalAlpha = 1;
   }
 }
 
@@ -225,6 +142,7 @@ export function WorldGlobe({ births, reducedMotion }: WorldGlobeProps) {
   const birthsRef = useRef(births);
   const reducedMotionRef = useRef(reducedMotion);
   const countries = useMemo(() => getAllCountryGeometries(), []);
+  const borders = useMemo(() => getCountryBorders(), []);
 
   useEffect(() => {
     birthsRef.current = births;
@@ -247,8 +165,14 @@ export function WorldGlobe({ births, reducedMotion }: WorldGlobeProps) {
     }
 
     const viewport: Viewport = { width: 0, height: 0, dpr: 1 };
-    let rotationStartedAt = performance.now();
-    let rotation = 0;
+    const graticule = geoGraticule10();
+    let stars: Star[] = [];
+    let background: CanvasGradient | null = null;
+    let centerX = 0;
+    let centerY = 0;
+    let radius = 0;
+    let rotation = -20;
+    let previousTimestamp: number | null = null;
     let frame = 0;
 
     const resize = () => {
@@ -261,30 +185,46 @@ export function WorldGlobe({ births, reducedMotion }: WorldGlobeProps) {
       canvas.style.width = `${next.width}px`;
       canvas.style.height = `${next.height}px`;
       context.setTransform(next.dpr, 0, 0, next.dpr, 0, 0);
-      rotationStartedAt = performance.now() - (rotation / 360) * FULL_ROTATION_MS;
+
+      centerX = next.width / 2;
+      centerY = next.height * 0.42;
+      radius = Math.min(next.width * 0.34, next.height * 0.42);
+
+      background = context.createRadialGradient(
+        centerX,
+        centerY * 0.9,
+        0,
+        centerX,
+        centerY,
+        Math.max(next.width, next.height) * 0.95,
+      );
+      background.addColorStop(0, '#0a1a2a');
+      background.addColorStop(0.35, '#061020');
+      background.addColorStop(1, '#04060d');
+
+      stars = makeStars(next.width, next.height);
     };
 
     const draw = (timestamp: number) => {
-      const time = timestamp / 1000;
-      if (!reducedMotionRef.current) {
-        rotation = (((timestamp - rotationStartedAt) / FULL_ROTATION_MS) * 360) % 360;
-      }
-
       const { width, height } = viewport;
-      if (!width || !height) {
+      if (!width || !height || !background) {
         resize();
         frame = window.requestAnimationFrame(draw);
         return;
       }
 
-      context.setTransform(viewport.dpr, 0, 0, viewport.dpr, 0, 0);
-      drawBackground(context, width, height, time);
+      const time = timestamp / 1000;
+      const delta = previousTimestamp === null ? 16 : Math.min(timestamp - previousTimestamp, MAX_FRAME_DELTA_MS);
+      previousTimestamp = timestamp;
+      const motionless = reducedMotionRef.current;
+      if (!motionless) {
+        rotation = (rotation + ROTATION_DEGREES_PER_MS * delta) % 360;
+      }
 
-      const centerX = width / 2;
-      const narrowViewport = width < 720;
-      const centerY = height * (narrowViewport ? 0.37 : 0.42);
-      const radius = Math.min(width * (narrowViewport ? 0.48 : 0.365), height * (narrowViewport ? 0.45 : 0.5));
-      drawOrbits(context, centerX, centerY, radius);
+      context.setTransform(viewport.dpr, 0, 0, viewport.dpr, 0, 0);
+      context.fillStyle = background;
+      context.fillRect(0, 0, width, height);
+      drawStars(context, stars, width, height, time, motionless);
 
       const projection = geoOrthographic()
         .translate([centerX, centerY])
@@ -294,9 +234,9 @@ export function WorldGlobe({ births, reducedMotion }: WorldGlobeProps) {
       const path = geoPath(projection, context);
       const center = projection.invert?.([centerX, centerY]);
 
-      const atmosphere = context.createRadialGradient(centerX, centerY, radius * 0.92, centerX, centerY, radius * 1.5);
-      atmosphere.addColorStop(0, 'rgba(96, 196, 225, 0.22)');
-      atmosphere.addColorStop(0.35, 'rgba(60, 150, 190, 0.08)');
+      const atmosphere = context.createRadialGradient(centerX, centerY, radius * 0.94, centerX, centerY, radius * 1.5);
+      atmosphere.addColorStop(0, 'rgba(96, 196, 225, 0.2)');
+      atmosphere.addColorStop(0.35, 'rgba(60, 150, 190, 0.07)');
       atmosphere.addColorStop(1, 'rgba(60, 150, 190, 0)');
       context.fillStyle = atmosphere;
       context.beginPath();
@@ -305,15 +245,15 @@ export function WorldGlobe({ births, reducedMotion }: WorldGlobeProps) {
 
       const ocean = context.createRadialGradient(
         centerX - radius * 0.35,
-        centerY - radius * 0.42,
-        radius * 0.05,
+        centerY - radius * 0.4,
+        radius * 0.1,
         centerX,
         centerY,
-        radius * 1.12,
+        radius * 1.15,
       );
-      ocean.addColorStop(0, '#17536a');
-      ocean.addColorStop(0.55, '#092f43');
-      ocean.addColorStop(1, '#020d1b');
+      ocean.addColorStop(0, '#12495e');
+      ocean.addColorStop(0.55, '#0b2c3d');
+      ocean.addColorStop(1, '#061722');
       context.beginPath();
       path({ type: 'Sphere' });
       context.fillStyle = ocean;
@@ -325,8 +265,8 @@ export function WorldGlobe({ births, reducedMotion }: WorldGlobeProps) {
       context.clip();
 
       context.beginPath();
-      path(geoGraticule10());
-      context.strokeStyle = 'rgba(170, 225, 245, 0.06)';
+      path(graticule);
+      context.strokeStyle = 'rgba(170, 225, 245, 0.05)';
       context.lineWidth = 0.6;
       context.stroke();
 
@@ -334,16 +274,23 @@ export function WorldGlobe({ births, reducedMotion }: WorldGlobeProps) {
       for (const country of countries) {
         path(country);
       }
-      context.fillStyle = '#0b2435';
+      context.fillStyle = '#0d2230';
       context.fill();
-      context.strokeStyle = 'rgba(89, 161, 184, 0.26)';
-      context.lineWidth = 0.55;
+      context.strokeStyle = 'rgba(140, 215, 240, 0.16)';
+      context.lineWidth = 0.5;
+      context.stroke();
+
+      context.beginPath();
+      path(borders);
+      context.strokeStyle = 'rgba(150, 210, 235, 0.09)';
+      context.lineWidth = 0.4;
       context.stroke();
 
       if (center) {
-        drawCityLights(context, projection, center, centerX, centerY, radius, time);
+        drawCityLights(context, projection, center, centerX, centerY, radius, time, motionless);
       }
 
+      // Limb darkening and terminator, lit from the upper left.
       const shading = context.createRadialGradient(
         centerX - radius * 0.42,
         centerY - radius * 0.46,
@@ -352,50 +299,50 @@ export function WorldGlobe({ births, reducedMotion }: WorldGlobeProps) {
         centerY,
         radius * 1.12,
       );
-      shading.addColorStop(0, 'rgba(150, 225, 245, 0.22)');
-      shading.addColorStop(0.32, 'rgba(30, 110, 140, 0.02)');
-      shading.addColorStop(0.62, 'rgba(3, 8, 18, 0.44)');
-      shading.addColorStop(1, 'rgba(1, 3, 8, 0.92)');
+      shading.addColorStop(0, 'rgba(150, 225, 245, 0.3)');
+      shading.addColorStop(0.32, 'rgba(30, 110, 140, 0.05)');
+      shading.addColorStop(0.62, 'rgba(3, 8, 18, 0.42)');
+      shading.addColorStop(1, 'rgba(1, 3, 8, 0.94)');
       context.beginPath();
       path({ type: 'Sphere' });
       context.fillStyle = shading;
       context.fill();
 
+      // Arrivals sit above the shading so they read as light rather than surface.
       const now = performance.now();
       for (let index = birthsRef.current.length - 1; index >= 0; index -= 1) {
         const birth = birthsRef.current[index];
-        const ageSeconds = (now - birth.timestamp) / 1000;
-        if (ageSeconds > POINT_LIFETIME_SECONDS) {
+        const age = (now - birth.timestamp) / 1000 / POINT_LIFETIME_SECONDS;
+        if (age < 0 || age > 1) {
           continue;
         }
 
         const projected = projection([birth.lng, birth.lat]);
-        const isVisible = projected && center && geoDistance([birth.lng, birth.lat], center) <= Math.PI / 2;
-        const opacity = getPointOpacity(ageSeconds, reducedMotionRef.current);
-        if (!projected || !isVisible || opacity <= 0) {
+        const onNearSide = projected && center && geoDistance([birth.lng, birth.lat], center) <= Math.PI / 2;
+        if (!projected || !onNearSide) {
           continue;
         }
 
-        const pulse = reducedMotionRef.current ? 1 : 1 + Math.sin(ageSeconds * 3.5) * 0.12;
-        const radiusForPing = 2 + ageSeconds * 8;
+        const opacity = (1 - age) * (1 - age);
+        const ringRadius = motionless ? 6 : 2 + age * 16;
         context.strokeStyle = `rgba(255, 226, 164, ${opacity * 0.7})`;
         context.lineWidth = 1.1;
         context.beginPath();
-        context.arc(projected[0], projected[1], radiusForPing, 0, Math.PI * 2);
+        context.arc(projected[0], projected[1], ringRadius, 0, Math.PI * 2);
         context.stroke();
         context.fillStyle = `rgba(255, 240, 200, ${opacity * 0.9})`;
         context.beginPath();
-        context.arc(projected[0], projected[1], 1.7 * pulse, 0, Math.PI * 2);
+        context.arc(projected[0], projected[1], 1.7, 0, Math.PI * 2);
         context.fill();
       }
       context.restore();
 
       const rim = context.createLinearGradient(centerX - radius, centerY - radius, centerX + radius, centerY + radius);
       rim.addColorStop(0, 'rgba(190, 240, 255, 0.55)');
-      rim.addColorStop(0.45, 'rgba(120, 200, 230, 0.14)');
+      rim.addColorStop(0.45, 'rgba(120, 200, 230, 0.12)');
       rim.addColorStop(1, 'rgba(120, 200, 230, 0)');
       context.strokeStyle = rim;
-      context.lineWidth = 1.25;
+      context.lineWidth = 1.3;
       context.beginPath();
       context.arc(centerX, centerY, radius, 0, Math.PI * 2);
       context.stroke();
@@ -414,7 +361,7 @@ export function WorldGlobe({ births, reducedMotion }: WorldGlobeProps) {
       observer?.disconnect();
       window.removeEventListener('resize', resize);
     };
-  }, [countries]);
+  }, [borders, countries]);
 
   return (
     <div className="world-globe" ref={containerRef}>
