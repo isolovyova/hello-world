@@ -60,7 +60,19 @@ The app uses d3-geo and a canvas renderer for the smallest stable globe implemen
 
 The atlas does not expose a distinct polygon for every small UN country/area record. If a selected record has no bundled polygon, the placement function uses the UN location metadata centroid as a conservative visual fallback; it still makes no claim about an actual birth location.
 
-The illustrated night-Earth layer uses decorative static lights that are separate from simulated birth lights. Optional sound is generated locally with Web Audio after an explicit user action; sparse story beats can play abstract baby-cry and giggle cues, with no external audio file or recording.
+The illustrated night-Earth layer uses decorative static lights that are separate from simulated birth lights. Sound intent is on by default: the app makes a best-effort Web Audio autoplay attempt, then unlocks on the first click, touch, or key press if the browser blocks autoplay. Sparse story beats play only a stylized synthesized newborn cry; there are no giggle cues, external audio files, or recordings. Manual sound-off still takes precedence, and hidden tabs pause the audio context.
+
+## About the numbers
+
+### A small note about the lights
+
+Hello, World is an open-ended statistical simulation, not a live feed of individual births or a one-minute countdown.
+
+I made it because nothing in the world feels more meaningful than the beginning of a new life. Nothing feels more enduring than the birth of a child.
+
+Hey! I'm Iryna Solovyova, a product builder who creates products for the sheer joy of building, this one included. Feel free to say hi if you'd like to collaborate or share feedback. [Find me on LinkedIn.](https://ca.linkedin.com/in/irynasolovyova)
+
+The simulation uses demographic projections from the United Nations World Population Prospects 2024 Revision. For 2026, the source data sums to roughly 132.5 million births worldwide - approximately 4.2 every second.
 
 ## Deployment
 

@@ -71,6 +71,12 @@ class FakeAudioContext {
   }
 }
 
+class BlockedAudioContext extends FakeAudioContext {
+  async resume() {
+    throw new Error('autoplay blocked');
+  }
+}
+
 afterEach(() => {
   Object.defineProperty(window, 'AudioContext', {
     configurable: true,
@@ -85,22 +91,32 @@ describe('soundscape', () => {
 
     await expect(soundscape.enable()).resolves.toBeUndefined();
     expect(soundscape.isEnabled()).toBe(false);
-    expect(() => soundscape.cueFirstBreath()).not.toThrow();
+    expect(() => soundscape.cue('cry')).not.toThrow();
     soundscape.stop();
   });
 
-  it('starts only when explicitly enabled and supports the first-breath cue', async () => {
+  it('best-effort enables audio and supports a synthesized cry cue', async () => {
     Object.defineProperty(window, 'AudioContext', { configurable: true, value: FakeAudioContext });
     const soundscape = createSoundscape();
 
     expect(soundscape.isEnabled()).toBe(false);
     await soundscape.enable();
     expect(soundscape.isEnabled()).toBe(true);
-    expect(() => soundscape.cueFirstBreath()).not.toThrow();
+    expect(() => soundscape.cue('cry')).not.toThrow();
+    expect('cueGiggle' in soundscape).toBe(false);
 
     soundscape.disable();
     expect(soundscape.isEnabled()).toBe(false);
     soundscape.stop();
   });
-});
 
+  it('resolves safely when autoplay is blocked so a later gesture can retry', async () => {
+    Object.defineProperty(window, 'AudioContext', { configurable: true, value: BlockedAudioContext });
+    const soundscape = createSoundscape();
+
+    await expect(soundscape.enable()).resolves.toBeUndefined();
+    expect(soundscape.isEnabled()).toBe(false);
+    expect(() => soundscape.cue('cry')).not.toThrow();
+    soundscape.stop();
+  });
+});

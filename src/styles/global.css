@@ -148,28 +148,28 @@ button {
 
 /* Entrance: each word lifts out of a blur, staggered by inline animation-delay. */
 .text-slot__layer--words {
-  animation: slot-fade-in 900ms ease both;
+  animation: slot-fade-in 2.8s ease both;
 }
 
 .text-slot__word {
   display: inline-block;
   white-space: pre;
-  animation: slot-word-in 900ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation: slot-word-in 2.8s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 
 /* Entrance: the whole line resolves out of a blur. */
 .text-slot__layer--soft {
-  animation: slot-soft-in 1200ms ease both;
+  animation: slot-soft-in 2.8s ease both;
 }
 
 /* Entrance: tracking settles back to its resting width. */
 .text-slot__layer--track {
-  animation: slot-track-in 1400ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation: slot-track-in 2.8s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 
 /* Declared last so the exit wins over whichever entrance the layer carries. */
 .text-slot__layer.is-leaving {
-  animation: slot-fade-out 900ms ease both;
+  animation: slot-fade-out 2.8s ease both;
 }
 
 @keyframes slot-fade-in {
