@@ -1,25 +1,17 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "rewrites": [
+  "routes": [
     {
-      "source": "/hello-world/assets/:path*",
-      "destination": "/assets/:path*"
+      "src": "/hello-world/assets/(.*)",
+      "dest": "/assets/$1"
     },
     {
-      "source": "/hello-world",
-      "destination": "/index.html"
+      "src": "/hello-world(?:/.*)?",
+      "dest": "/index.html"
     },
     {
-      "source": "/hello-world/",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/hello-world/:path*",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/:path*",
-      "destination": "https://solovyova.lovable.app/:path*"
+      "src": "/(.*)",
+      "dest": "https://solovyova.lovable.app/$1"
     }
   ]
 }
