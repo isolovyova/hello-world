@@ -20,7 +20,6 @@ export function Methodology({ isOpen, onClose }: MethodologyProps) {
         <button className="methodology-close" type="button" onClick={onClose} aria-label="Close methodology">
           Close
         </button>
-        <p className="methodology-kicker">A small note about the lights</p>
         <h2 id="methodology-title">About the numbers</h2>
         <p>
           Hello, World is an open-ended statistical simulation, not a live feed of individual births or a one-minute

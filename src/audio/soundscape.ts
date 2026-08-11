@@ -9,166 +9,171 @@ export type SoundscapeControls = {
   isEnabled: () => boolean;
 };
 
-type AudioWindow = Window & {
-  webkitAudioContext?: typeof AudioContext;
-};
+const NEWBORN_AUDIO_FILES = [
+  'audio/newborn-cry-01.mp3',
+  'audio/newborn-cry-02.mp3',
+  'audio/newborn-cry-03.mp3',
+  'audio/newborn-cry-04.mp3',
+  'audio/newborn-cry-05.mp3',
+] as const;
 
-function getAudioContextConstructor(): typeof AudioContext | undefined {
-  if (typeof window === 'undefined') {
-    return undefined;
-  }
+const MICRO_PAUSE_MIN_MS = 140;
+const MICRO_PAUSE_MAX_MS = 360;
 
-  return window.AudioContext ?? (window as AudioWindow).webkitAudioContext;
-}
-
-function createNoiseBuffer(context: AudioContext, durationSeconds: number): AudioBuffer {
-  const frameCount = Math.max(1, Math.floor(context.sampleRate * durationSeconds));
-  const buffer = context.createBuffer(1, frameCount, context.sampleRate);
-  const channel = buffer.getChannelData(0);
-
-  for (let index = 0; index < channel.length; index += 1) {
-    channel[index] = Math.random() * 2 - 1;
-  }
-
-  return buffer;
+function audioUrl(path: string): string {
+  return `${import.meta.env.BASE_URL}${path}`;
 }
 
 export function createSoundscape(): SoundscapeControls {
-  let context: AudioContext | null = null;
-  let masterGain: GainNode | null = null;
+  let player: HTMLAudioElement | null = null;
   let enabled = false;
+  let stopped = false;
+  let trackIndex = 0;
+  let nextTrackTimer: number | undefined;
 
-  const ensureAudio = (): boolean => {
-    if (context && masterGain) {
-      return true;
+  const clearNextTrackTimer = () => {
+    if (nextTrackTimer !== undefined) {
+      window.clearTimeout(nextTrackTimer);
+      nextTrackTimer = undefined;
+    }
+  };
+
+  const setTrack = () => {
+    if (!player) {
+      return;
     }
 
-    const AudioContextConstructor = getAudioContextConstructor();
-    if (!AudioContextConstructor) {
+    player.src = audioUrl(NEWBORN_AUDIO_FILES[trackIndex]);
+    player.load();
+  };
+
+  const playCurrentTrack = async (): Promise<boolean> => {
+    if (!player) {
       return false;
     }
 
     try {
-      context = new AudioContextConstructor();
-      masterGain = context.createGain();
-      masterGain.gain.value = 0;
-      masterGain.connect(context.destination);
+      await player.play();
       return true;
     } catch {
-      context = null;
-      masterGain = null;
+      return false;
+    }
+  };
+
+  const playNextTrack = () => {
+    if (!enabled || stopped || !player) {
+      return;
+    }
+
+    trackIndex = (trackIndex + 1) % NEWBORN_AUDIO_FILES.length;
+    setTrack();
+    void playCurrentTrack().then((played) => {
+      if (!played) {
+        enabled = false;
+      }
+    });
+  };
+
+  const scheduleNextTrack = () => {
+    clearNextTrackTimer();
+    if (!enabled || stopped) {
+      return;
+    }
+
+    const pauseRange = MICRO_PAUSE_MAX_MS - MICRO_PAUSE_MIN_MS;
+    const pause = MICRO_PAUSE_MIN_MS + Math.floor(Math.random() * (pauseRange + 1));
+    nextTrackTimer = window.setTimeout(() => {
+      nextTrackTimer = undefined;
+      playNextTrack();
+    }, pause);
+  };
+
+  const handleTrackEnded = () => {
+    scheduleNextTrack();
+  };
+
+  const handleTrackError = () => {
+    // Move past a missing/corrupt asset instead of leaving the experience
+    // silent. The checked-in five files are expected to play normally.
+    scheduleNextTrack();
+  };
+
+  const ensurePlayer = (): boolean => {
+    if (player) {
+      return true;
+    }
+
+    if (typeof window === 'undefined' || typeof window.Audio !== 'function') {
+      return false;
+    }
+
+    try {
+      player = new window.Audio();
+      player.preload = 'auto';
+      player.volume = 0.48;
+      player.addEventListener('ended', handleTrackEnded);
+      player.addEventListener('error', handleTrackError);
+      setTrack();
+      return true;
+    } catch {
+      player = null;
       return false;
     }
   };
 
   const enable = async () => {
-    if (!ensureAudio() || !context || !masterGain) {
+    stopped = false;
+    if (!ensurePlayer() || !player) {
+      enabled = false;
       return;
     }
 
-    try {
-      await context.resume();
-      masterGain.gain.cancelScheduledValues(context.currentTime);
-      masterGain.gain.setTargetAtTime(0.9, context.currentTime, 0.2);
-      enabled = true;
-    } catch {
+    enabled = true;
+    clearNextTrackTimer();
+    if (player.ended) {
+      trackIndex = (trackIndex + 1) % NEWBORN_AUDIO_FILES.length;
+      setTrack();
+    }
+    const played = await playCurrentTrack();
+    if (!played) {
       enabled = false;
     }
   };
 
   const disable = () => {
-    if (!context || !masterGain) {
-      enabled = false;
-      return;
-    }
-
-    masterGain.gain.cancelScheduledValues(context.currentTime);
-    masterGain.gain.setTargetAtTime(0, context.currentTime, 0.18);
     enabled = false;
+    clearNextTrackTimer();
+    if (player) {
+      player.pause();
+      player.currentTime = 0;
+    }
   };
 
   const pause = () => {
-    if (context && context.state === 'running') {
-      void context.suspend();
+    clearNextTrackTimer();
+    if (player && !player.paused) {
+      player.pause();
     }
   };
 
   const stop = () => {
-    if (context) {
-      void context.close().catch(() => undefined);
-    }
-
-    context = null;
-    masterGain = null;
+    stopped = true;
     enabled = false;
-  };
+    clearNextTrackTimer();
 
-  const createTone = (
-    startAt: number,
-    duration: number,
-    startFrequency: number,
-    endFrequency: number,
-    peakGain: number,
-    waveform: OscillatorType = 'sine',
-  ) => {
-    if (!context || !masterGain) {
-      return;
-    }
-
-    const tone = context.createOscillator();
-    const toneGain = context.createGain();
-
-    tone.type = waveform;
-    tone.frequency.setValueAtTime(startFrequency, startAt);
-    tone.frequency.linearRampToValueAtTime(endFrequency, startAt + duration);
-    toneGain.gain.setValueAtTime(0.0001, startAt);
-    toneGain.gain.linearRampToValueAtTime(peakGain, startAt + Math.min(0.06, duration / 3));
-    toneGain.gain.exponentialRampToValueAtTime(0.0001, startAt + duration);
-    tone.connect(toneGain);
-    toneGain.connect(masterGain);
-    tone.start(startAt);
-    tone.stop(startAt + duration);
-  };
-
-  const cueNewbornCry = () => {
-    if (!enabled || !context || !masterGain) {
-      return;
-    }
-
-    const startAt = context.currentTime + 0.04;
-    const pulses = [
-      { offset: 0, duration: 0.62, start: 430, peak: 1_080 },
-      { offset: 0.7, duration: 0.78, start: 500, peak: 1_180 },
-    ];
-
-    for (const pulse of pulses) {
-      const pulseStart = startAt + pulse.offset;
-      const source = context.createBufferSource();
-      const filter = context.createBiquadFilter();
-      const gain = context.createGain();
-
-      source.buffer = createNoiseBuffer(context, pulse.duration);
-      filter.type = 'bandpass';
-      filter.frequency.setValueAtTime(1_900, pulseStart);
-      filter.frequency.linearRampToValueAtTime(1_050, pulseStart + pulse.duration);
-      gain.gain.setValueAtTime(0.0001, pulseStart);
-      gain.gain.linearRampToValueAtTime(0.28, pulseStart + 0.09);
-      gain.gain.exponentialRampToValueAtTime(0.0001, pulseStart + pulse.duration);
-      source.connect(filter);
-      filter.connect(gain);
-      gain.connect(masterGain);
-      source.start(pulseStart);
-      source.stop(pulseStart + pulse.duration);
-
-      createTone(pulseStart, pulse.duration, pulse.start, pulse.peak, 0.3, 'triangle');
-      createTone(pulseStart + 0.05, pulse.duration - 0.1, pulse.peak, 620, 0.1, 'sine');
+    if (player) {
+      player.pause();
+      player.removeEventListener('ended', handleTrackEnded);
+      player.removeEventListener('error', handleTrackError);
+      player.removeAttribute('src');
+      player.load();
+      player = null;
     }
   };
 
-  const cue = (kind: SoundCueKind) => {
-    if (kind === 'cry') {
-      cueNewbornCry();
-    }
+  const cue = (_kind: SoundCueKind) => {
+    // The five downloaded recordings form one continuous background. Story
+    // beats no longer interrupt it with separate synthesized cues.
   };
 
   return {

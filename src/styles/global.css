@@ -372,15 +372,6 @@ button {
   cursor: pointer;
 }
 
-.methodology-kicker {
-  margin: 0;
-  color: var(--gold);
-  font-family: var(--mono);
-  font-size: 0.7rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-}
-
 .methodology-dialog h2 {
   margin: 0;
   color: var(--cream);

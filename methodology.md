@@ -24,7 +24,7 @@ The full-screen story repeats intentionally while you stay. `Hello, World.` rema
 
 `About the numbers` is the methodology entry point from the experience. The visible panel stays intentionally short; this document contains the fuller source and model notes.
 
-Sound intent is on by default. The app makes a best-effort Web Audio autoplay attempt; if the browser blocks it, the first click, touch, or key press retries the unlock without showing an onboarding screen. Sparse selected story beats play only a stylized synthesized newborn cry. There are no giggle cues, external audio files, or recordings of a particular child. Manual sound-off takes precedence, and hidden tabs pause the audio context. Dim background lights are decorative night-Earth texture; only the brighter birth lights affect the counter.
+Sound intent is on by default. The app makes a best-effort audio autoplay attempt; if the browser blocks it, the first click, touch, or key press retries the unlock without showing an onboarding screen. The five provided newborn recordings rotate continuously in the background with short micro-pauses. The old synthesized and giggle cues are gone. Manual sound-off takes precedence, and hidden tabs pause the audio. Dim background lights are decorative night-Earth texture; only the brighter birth lights affect the counter.
 
 ## Data source and preparation
 

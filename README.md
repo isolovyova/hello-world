@@ -60,11 +60,9 @@ The app uses d3-geo and a canvas renderer for the smallest stable globe implemen
 
 The atlas does not expose a distinct polygon for every small UN country/area record. If a selected record has no bundled polygon, the placement function uses the UN location metadata centroid as a conservative visual fallback; it still makes no claim about an actual birth location.
 
-The illustrated night-Earth layer uses decorative static lights that are separate from simulated birth lights. Sound intent is on by default: the app makes a best-effort Web Audio autoplay attempt, then unlocks on the first click, touch, or key press if the browser blocks autoplay. Sparse story beats play only a stylized synthesized newborn cry; there are no giggle cues, external audio files, or recordings. Manual sound-off still takes precedence, and hidden tabs pause the audio context.
+The illustrated night-Earth layer uses decorative static lights that are separate from simulated birth lights. Sound intent is on by default: the app makes a best-effort audio autoplay attempt, then unlocks on the first click, touch, or key press if the browser blocks autoplay. The five provided newborn recordings rotate as a continuous background with short micro-pauses; the old synthesized and giggle cues are gone. Manual sound-off still takes precedence, and hidden tabs pause the audio.
 
 ## About the numbers
-
-### A small note about the lights
 
 Hello, World is an open-ended statistical simulation, not a live feed of individual births or a one-minute countdown.
 
@@ -102,6 +100,7 @@ The tests cover prepared-data filtering and totals, normalized weights, exponent
 
 - [`SPEC.md`](./SPEC.md) — the recovered Product + Implementation Spec supplied in the referenced conversation.
 - [`methodology.md`](./methodology.md) — the public-facing methodology copy and limitations.
+- [`public/audio/`](./public/audio/) — the five provided newborn recordings used by the background rotation.
 - [`scripts/download-un-data.sh`](./scripts/download-un-data.sh) — official source download path.
 - [`scripts/prepare-birth-data.ts`](./scripts/prepare-birth-data.ts) — deterministic source transformation.
 - [`src/data/births-2026.json`](./src/data/births-2026.json) — generated frontend data.
