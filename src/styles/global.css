@@ -404,6 +404,17 @@ button {
   line-height: 1.55;
 }
 
+.methodology-dialog a {
+  color: var(--gold);
+  text-decoration-color: rgba(226, 180, 88, 0.45);
+  text-underline-offset: 0.18em;
+}
+
+.methodology-dialog a:hover,
+.methodology-dialog a:focus-visible {
+  color: var(--cream);
+}
+
 .methodology-dialog .methodology-source {
   display: block;
   margin-top: 0.4rem;

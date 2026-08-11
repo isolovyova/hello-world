@@ -1,9 +1,14 @@
+import type { SoundCueKind } from '../narrative';
+
 export type SoundscapeControls = {
   enable: () => Promise<void>;
   disable: () => void;
   pause: () => void;
   stop: () => void;
   cueFirstBreath: () => void;
+  cueBabyCry: () => void;
+  cueGiggle: () => void;
+  cue: (kind: SoundCueKind) => void;
   isEnabled: () => boolean;
 };
 
@@ -73,7 +78,7 @@ export function createSoundscape(): SoundscapeControls {
     source.loop = true;
     filter.type = 'lowpass';
     filter.frequency.value = 700;
-    gain.gain.value = 0.018;
+    gain.gain.value = 0.024;
     source.connect(filter);
     filter.connect(gain);
     gain.connect(masterGain);
@@ -90,7 +95,7 @@ export function createSoundscape(): SoundscapeControls {
       await context.resume();
       startAmbient();
       masterGain.gain.cancelScheduledValues(context.currentTime);
-      masterGain.gain.setTargetAtTime(0.75, context.currentTime, 0.8);
+      masterGain.gain.setTargetAtTime(0.9, context.currentTime, 0.45);
       enabled = true;
     } catch {
       enabled = false;
@@ -134,6 +139,33 @@ export function createSoundscape(): SoundscapeControls {
     enabled = false;
   };
 
+  const createTone = (
+    startAt: number,
+    duration: number,
+    startFrequency: number,
+    endFrequency: number,
+    peakGain: number,
+    waveform: OscillatorType = 'sine',
+  ) => {
+    if (!context || !masterGain) {
+      return;
+    }
+
+    const tone = context.createOscillator();
+    const toneGain = context.createGain();
+
+    tone.type = waveform;
+    tone.frequency.setValueAtTime(startFrequency, startAt);
+    tone.frequency.linearRampToValueAtTime(endFrequency, startAt + duration);
+    toneGain.gain.setValueAtTime(0.0001, startAt);
+    toneGain.gain.linearRampToValueAtTime(peakGain, startAt + Math.min(0.06, duration / 3));
+    toneGain.gain.exponentialRampToValueAtTime(0.0001, startAt + duration);
+    tone.connect(toneGain);
+    toneGain.connect(masterGain);
+    tone.start(startAt);
+    tone.stop(startAt + duration);
+  };
+
   const cueFirstBreath = () => {
     if (!enabled || !context || !masterGain) {
       return;
@@ -152,7 +184,7 @@ export function createSoundscape(): SoundscapeControls {
     filter.frequency.setValueAtTime(440, startAt);
     filter.frequency.linearRampToValueAtTime(210, startAt + duration);
     gain.gain.setValueAtTime(0.0001, startAt);
-    gain.gain.linearRampToValueAtTime(0.12, startAt + 0.12);
+    gain.gain.linearRampToValueAtTime(0.16, startAt + 0.12);
     gain.gain.exponentialRampToValueAtTime(0.0001, startAt + duration);
     source.connect(filter);
     filter.connect(gain);
@@ -162,7 +194,7 @@ export function createSoundscape(): SoundscapeControls {
     tone.frequency.setValueAtTime(240, startAt);
     tone.frequency.exponentialRampToValueAtTime(150, startAt + duration);
     toneGain.gain.setValueAtTime(0.0001, startAt);
-    toneGain.gain.linearRampToValueAtTime(0.025, startAt + 0.1);
+    toneGain.gain.linearRampToValueAtTime(0.04, startAt + 0.1);
     toneGain.gain.exponentialRampToValueAtTime(0.0001, startAt + duration);
     tone.connect(toneGain);
     toneGain.connect(masterGain);
@@ -173,12 +205,74 @@ export function createSoundscape(): SoundscapeControls {
     tone.stop(startAt + duration);
   };
 
+  const cueBabyCry = () => {
+    if (!enabled || !context || !masterGain) {
+      return;
+    }
+
+    const startAt = context.currentTime + 0.03;
+    const duration = 0.95;
+    const source = context.createBufferSource();
+    const filter = context.createBiquadFilter();
+    const gain = context.createGain();
+
+    source.buffer = createNoiseBuffer(context, duration);
+    filter.type = 'bandpass';
+    filter.frequency.setValueAtTime(1_400, startAt);
+    filter.frequency.linearRampToValueAtTime(900, startAt + duration);
+    gain.gain.setValueAtTime(0.0001, startAt);
+    gain.gain.linearRampToValueAtTime(0.13, startAt + 0.08);
+    gain.gain.exponentialRampToValueAtTime(0.0001, startAt + duration);
+    source.connect(filter);
+    filter.connect(gain);
+    gain.connect(masterGain);
+    source.start(startAt);
+    source.stop(startAt + duration);
+
+    createTone(startAt, duration, 620, 980, 0.22, 'triangle');
+    createTone(startAt + 0.04, duration - 0.08, 920, 560, 0.08, 'sine');
+  };
+
+  const cueGiggle = () => {
+    if (!enabled || !context || !masterGain) {
+      return;
+    }
+
+    const startAt = context.currentTime + 0.03;
+    const chirps = [
+      { offset: 0, duration: 0.14, start: 780, end: 1_080 },
+      { offset: 0.18, duration: 0.13, start: 860, end: 1_180 },
+      { offset: 0.35, duration: 0.17, start: 720, end: 1_020 },
+    ];
+
+    for (const chirp of chirps) {
+      createTone(startAt + chirp.offset, chirp.duration, chirp.start, chirp.end, 0.16, 'triangle');
+    }
+  };
+
+  const cue = (kind: SoundCueKind) => {
+    if (kind === 'cry') {
+      cueBabyCry();
+      return;
+    }
+
+    if (kind === 'giggle') {
+      cueGiggle();
+      return;
+    }
+
+    cueFirstBreath();
+  };
+
   return {
     enable,
     disable,
     pause,
     stop,
     cueFirstBreath,
+    cueBabyCry,
+    cueGiggle,
+    cue,
     isEnabled: () => enabled,
   };
 }

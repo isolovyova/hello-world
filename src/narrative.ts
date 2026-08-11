@@ -1,6 +1,7 @@
 import type { BirthDataset, CountryBirthData } from './types';
 
 export type StoryHeadline = string | ((liveCount: number) => string);
+export type SoundCueKind = 'breath' | 'cry' | 'giggle';
 
 export type StoryBeat = {
   id: string;
@@ -8,7 +9,7 @@ export type StoryBeat = {
   headline: StoryHeadline;
   body: string;
   durationSeconds: number;
-  soundCue?: boolean;
+  soundCue?: SoundCueKind;
 };
 
 export type StoryBeatState = {
@@ -45,7 +46,7 @@ function formatExpectedBirthsPerMinute(country: CountryBirthData | undefined, se
 function countryFact(
   dataset: StoryDataset,
   iso3: (typeof COUNTRY_FACT_ISO3)[number],
-  soundCue = false,
+  soundCue?: SoundCueKind,
 ): StoryBeat {
   const country = getCountry(dataset.countries, iso3);
   const countryName = country?.name ?? iso3;
@@ -77,7 +78,7 @@ export function createStoryBeats(dataset: StoryDataset): StoryBeat[] {
         `While you were here, ${liveCount.toLocaleString()} ${liveCount === 1 ? 'life began.' : 'lives began.'}`,
       body: "You don't know their names. You will probably never meet them. But you're sharing the world now.",
       durationSeconds: STORY_BEAT_DURATION_SECONDS,
-      soundCue: true,
+      soundCue: 'cry',
     },
     {
       id: 'somewhere-right-now',
@@ -93,7 +94,7 @@ export function createStoryBeats(dataset: StoryDataset): StoryBeat[] {
       body: 'Different rooms. Different languages. One shared sky.',
       durationSeconds: STORY_BEAT_DURATION_SECONDS,
     },
-    countryFact(dataset, 'IND', true),
+    countryFact(dataset, 'IND', 'giggle'),
     {
       id: 'world-keeps-turning',
       eyebrow: 'The world keeps turning',
@@ -109,14 +110,14 @@ export function createStoryBeats(dataset: StoryDataset): StoryBeat[] {
       body: 'For a moment, nothing else needs to be solved.',
       durationSeconds: STORY_BEAT_DURATION_SECONDS,
     },
-    countryFact(dataset, 'CHN', true),
+    countryFact(dataset, 'CHN'),
     {
       id: 'gentle-reminder',
       eyebrow: 'A gentle reminder',
       headline: 'The world is more than the news.',
       body: 'Joy can be quiet and still be real.',
       durationSeconds: STORY_BEAT_DURATION_SECONDS,
-      soundCue: true,
+      soundCue: 'giggle',
     },
     countryFact(dataset, 'IDN'),
     {
@@ -168,4 +169,3 @@ export function getStoryBeat(elapsedSeconds: number, dataset: StoryDataset): Sto
 export function getStoryHeadline(beat: StoryBeat, liveCount: number): string {
   return typeof beat.headline === 'function' ? beat.headline(liveCount) : beat.headline;
 }
-
