@@ -6,6 +6,10 @@
       "dest": "/assets/$1"
     },
     {
+      "src": "/hello-world/audio/(.*)",
+      "dest": "/audio/$1"
+    },
+    {
       "src": "/hello-world(?:/.*)?",
       "dest": "/index.html"
     },

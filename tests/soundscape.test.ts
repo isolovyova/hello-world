@@ -1,92 +1,78 @@
-import { describe, expect, it, afterEach } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { createSoundscape } from '../src/audio/soundscape';
 
-const originalAudioContext = (window as Window & { AudioContext?: typeof AudioContext }).AudioContext;
+const originalAudio = window.Audio;
+let createdPlayer: FakeAudioElement | null = null;
 
-class FakeAudioParam {
-  value = 0;
+class FakeAudioElement {
+  static allowPlay = true;
 
-  cancelScheduledValues() {}
-
-  setTargetAtTime() {}
-
-  setValueAtTime() {}
-
-  linearRampToValueAtTime() {}
-
-  exponentialRampToValueAtTime() {}
-}
-
-class FakeAudioNode {
-  connect() {}
-
-  disconnect() {}
-
-  start() {}
-
-  stop() {}
-}
-
-class FakeAudioContext {
+  src = '';
+  preload = '';
+  volume = 1;
+  paused = true;
+  ended = false;
   currentTime = 0;
-  sampleRate = 8_000;
-  state: AudioContextState = 'suspended';
-  destination = new FakeAudioNode();
+  private listeners = new Map<string, Array<() => void>>();
 
-  createGain() {
-    return Object.assign(new FakeAudioNode(), { gain: new FakeAudioParam() });
+  constructor() {
+    createdPlayer = this;
   }
 
-  createBiquadFilter() {
-    return Object.assign(new FakeAudioNode(), {
-      type: 'lowpass',
-      frequency: new FakeAudioParam(),
-    });
+  addEventListener(type: string, listener: () => void) {
+    this.listeners.set(type, [...(this.listeners.get(type) ?? []), listener]);
   }
 
-  createBufferSource() {
-    return Object.assign(new FakeAudioNode(), { buffer: null as AudioBuffer | null, loop: false });
+  removeEventListener(type: string, listener: () => void) {
+    this.listeners.set(
+      type,
+      (this.listeners.get(type) ?? []).filter((candidate) => candidate !== listener),
+    );
   }
 
-  createOscillator() {
-    return Object.assign(new FakeAudioNode(), { frequency: new FakeAudioParam(), type: 'sine' });
+  load() {}
+
+  async play() {
+    if (!FakeAudioElement.allowPlay) {
+      throw new Error('autoplay blocked');
+    }
+    this.paused = false;
+    this.ended = false;
   }
 
-  createBuffer(_channels: number, frameCount: number, sampleRate: number) {
-    return {
-      getChannelData: () => new Float32Array(Math.max(1, Math.min(frameCount, sampleRate))),
-    } as unknown as AudioBuffer;
+  pause() {
+    this.paused = true;
   }
 
-  async resume() {
-    this.state = 'running';
+  removeAttribute(name: string) {
+    if (name === 'src') {
+      this.src = '';
+    }
   }
 
-  async suspend() {
-    this.state = 'suspended';
-  }
-
-  async close() {
-    this.state = 'closed';
+  finish() {
+    this.ended = true;
+    this.paused = true;
+    for (const listener of this.listeners.get('ended') ?? []) {
+      listener();
+    }
   }
 }
 
-class BlockedAudioContext extends FakeAudioContext {
-  async resume() {
-    throw new Error('autoplay blocked');
-  }
+function setAudioConstructor(value: unknown) {
+  Object.defineProperty(window, 'Audio', { configurable: true, value });
 }
 
 afterEach(() => {
-  Object.defineProperty(window, 'AudioContext', {
-    configurable: true,
-    value: originalAudioContext,
-  });
+  setAudioConstructor(originalAudio);
+  FakeAudioElement.allowPlay = true;
+  createdPlayer = null;
+  vi.useRealTimers();
 });
 
 describe('soundscape', () => {
-  it('stays safe when Web Audio is unavailable', async () => {
-    Object.defineProperty(window, 'AudioContext', { configurable: true, value: undefined });
+  it('stays safe when browser audio is unavailable', async () => {
+    setAudioConstructor(undefined);
     const soundscape = createSoundscape();
 
     await expect(soundscape.enable()).resolves.toBeUndefined();
@@ -95,28 +81,40 @@ describe('soundscape', () => {
     soundscape.stop();
   });
 
-  it('best-effort enables audio and supports a synthesized cry cue', async () => {
-    Object.defineProperty(window, 'AudioContext', { configurable: true, value: FakeAudioContext });
+  it('plays the five provided recordings in a rotating background', async () => {
+    vi.useFakeTimers();
+    setAudioConstructor(FakeAudioElement);
     const soundscape = createSoundscape();
 
-    expect(soundscape.isEnabled()).toBe(false);
     await soundscape.enable();
     expect(soundscape.isEnabled()).toBe(true);
-    expect(() => soundscape.cue('cry')).not.toThrow();
-    expect('cueGiggle' in soundscape).toBe(false);
+    expect(createdPlayer?.src).toContain('/audio/newborn-cry-01.mp3');
 
+    createdPlayer?.finish();
+    vi.advanceTimersByTime(500);
+    await Promise.resolve();
+    expect(createdPlayer?.src).toContain('/audio/newborn-cry-02.mp3');
+
+    soundscape.pause();
+    expect(createdPlayer?.paused).toBe(true);
+    await soundscape.enable();
+    expect(createdPlayer?.paused).toBe(false);
     soundscape.disable();
     expect(soundscape.isEnabled()).toBe(false);
     soundscape.stop();
   });
 
   it('resolves safely when autoplay is blocked so a later gesture can retry', async () => {
-    Object.defineProperty(window, 'AudioContext', { configurable: true, value: BlockedAudioContext });
+    setAudioConstructor(FakeAudioElement);
+    FakeAudioElement.allowPlay = false;
     const soundscape = createSoundscape();
 
     await expect(soundscape.enable()).resolves.toBeUndefined();
     expect(soundscape.isEnabled()).toBe(false);
-    expect(() => soundscape.cue('cry')).not.toThrow();
+
+    FakeAudioElement.allowPlay = true;
+    await soundscape.enable();
+    expect(soundscape.isEnabled()).toBe(true);
     soundscape.stop();
   });
 });

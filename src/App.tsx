@@ -67,11 +67,8 @@ export default function App() {
   const reducedMotion = useReducedMotion();
   const weightedCountries = useMemo(() => createWeightedCountries(dataset.countries), []);
   const soundscapeRef = useRef<SoundscapeControls | null>(null);
-  const soundEnabledRef = useRef(false);
   const soundRequestedRef = useRef(true);
-  const startupCuePlayedRef = useRef(false);
   const unlockCleanupRef = useRef<(() => void) | null>(null);
-  const storyBeatRef = useRef('0:one-minute-on-earth');
 
   const tickingStory = useMemo(() => getStoryBeat(elapsedSeconds, dataset), [elapsedSeconds]);
 
@@ -139,7 +136,7 @@ export default function App() {
       unlockCleanupRef.current = null;
     };
 
-    const attemptEnable = async (playStartupCue: boolean) => {
+    const attemptEnable = async () => {
       if (disposed || !soundRequestedRef.current) {
         return;
       }
@@ -158,10 +155,6 @@ export default function App() {
       if (soundscape.isEnabled()) {
         setSoundEnabled(true);
         removeUnlockListeners();
-        if (playStartupCue && !startupCuePlayedRef.current) {
-          soundscape.cue('cry');
-          startupCuePlayedRef.current = true;
-        }
         return;
       }
 
@@ -170,7 +163,7 @@ export default function App() {
       }
 
       const handleGesture = () => {
-        void attemptEnable(true);
+        void attemptEnable();
       };
 
       window.addEventListener('pointerdown', handleGesture);
@@ -187,12 +180,12 @@ export default function App() {
       if (document.visibilityState === 'hidden') {
         soundscape.pause();
       } else if (soundRequestedRef.current) {
-        void attemptEnable(false);
+        void attemptEnable();
       }
     };
 
     document.addEventListener('visibilitychange', handleVisibilityChange);
-    void attemptEnable(true);
+    void attemptEnable();
     return () => {
       disposed = true;
       document.removeEventListener('visibilitychange', handleVisibilityChange);
@@ -201,21 +194,6 @@ export default function App() {
       soundscapeRef.current = null;
     };
   }, []);
-
-  useEffect(() => {
-    soundEnabledRef.current = soundEnabled;
-  }, [soundEnabled]);
-
-  useEffect(() => {
-    if (storyBeatRef.current === currentStory.instanceKey) {
-      return;
-    }
-
-    storyBeatRef.current = currentStory.instanceKey;
-    if (soundEnabledRef.current && currentStory.beat.soundCue) {
-      soundscapeRef.current?.cue(currentStory.beat.soundCue);
-    }
-  }, [currentStory]);
 
   const handleSoundToggle = async () => {
     const soundscape = soundscapeRef.current;
@@ -241,10 +219,6 @@ export default function App() {
     }
     const enabled = soundscape.isEnabled();
     setSoundEnabled(enabled);
-    if (enabled) {
-      soundscape.cue('cry');
-      startupCuePlayedRef.current = true;
-    }
   };
 
   return (
