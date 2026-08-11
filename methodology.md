@@ -1,10 +1,12 @@
-# How this works
+# About the numbers
 
 Hello, World is an open-ended statistical simulation, not a live feed of individual births or a one-minute countdown.
 
-The simulation uses demographic projections from the United Nations World Population Prospects 2024 Revision.
+I made it because nothing in the world feels more meaningful than the beginning of a new life. Nothing feels more enduring than the birth of a child.
 
-For 2026, the downloaded UN source contains 132,503,451 projected births worldwide — approximately 4.2 births every second when divided across 365 days.
+Hey! I'm Iryna Solovyova, a product builder who creates products for the sheer joy of building, this one included. Feel free to say hi if you'd like to collaborate or share feedback. [Find me on LinkedIn.](https://ca.linkedin.com/in/irynasolovyova)
+
+The simulation uses demographic projections from the United Nations World Population Prospects 2024 Revision. For 2026, the source data sums to roughly 132.5 million births worldwide - approximately 4.2 every second.
 
 The simulation uses those estimates in three ways:
 
@@ -20,15 +22,9 @@ Each simulated birth is assigned to a country in proportion to that country's pr
 
 The full-screen story repeats intentionally while you stay. `Hello, World.` remains the permanent title while twelve short beats move through the lower part of the globe in a three-minute loop. There is no completion moment, frozen final count, reset, or terminal screen. Country story beats convert projected annual births into an expected average per minute; they are not live country reports. The philosophical lines are original writing, not attributed quotations.
 
-`About the numbers` is the methodology entry point from the experience. It explains the source, simulation, country weighting, and the limits of the visual metaphor.
+`About the numbers` is the methodology entry point from the experience. The visible panel stays intentionally short; this document contains the fuller source and model notes.
 
-The sound is optional and off by default. When enabled, sparse story beats can play abstract synthesized baby-cry and giggle cues, with a softer first-breath fallback. They are not recordings of a particular child or a live birth. Dim background lights are decorative night-Earth texture; only the brighter birth lights affect the counter.
-
-## Why I made this
-
-Nothing in the world feels more meaningful than the beginning of a new life. Nothing feels more enduring than the birth of a child.
-
-Hey! I'm Iryna Solovyova, a product builder who creates products for the sheer joy of building, this one included. Feel free to [say hi on LinkedIn](https://ca.linkedin.com/in/irynasolovyova) if you'd like to collaborate or share feedback.
+Sound intent is on by default. The app makes a best-effort Web Audio autoplay attempt; if the browser blocks it, the first click, touch, or key press retries the unlock without showing an onboarding screen. Sparse selected story beats play only a stylized synthesized newborn cry. There are no giggle cues, external audio files, or recordings of a particular child. Manual sound-off takes precedence, and hidden tabs pause the audio context. Dim background lights are decorative night-Earth texture; only the brighter birth lights affect the counter.
 
 ## Data source and preparation
 

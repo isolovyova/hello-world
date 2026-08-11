@@ -25,7 +25,8 @@ describe('open-ended story beats', () => {
     expect(nextCycle.cycleIndex).toBe(1);
     expect(getStoryBeat(195, dataset).beat.id).toBe('somewhere-right-now');
     expect(nextCycle.beat.soundCue).toBe('cry');
-    expect(getStoryBeat(45, dataset).beat.soundCue).toBe('giggle');
+    expect(getStoryBeat(45, dataset).beat.soundCue).toBe('cry');
+    expect(getStoryBeat(120, dataset).beat.soundCue).toBe('cry');
   });
 
   it('renders the live count inside the count beat', () => {

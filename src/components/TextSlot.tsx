@@ -19,9 +19,9 @@ export type TextEntrance = 'words' | 'soft' | 'track';
 
 export const TEXT_ENTRANCES: readonly TextEntrance[] = ['words', 'soft', 'track'];
 
-/** Slightly outlasts the 900ms slot-fade-out animation in global.css. */
-const EXIT_MS = 950;
-const WORD_STAGGER_MS = 55;
+/** Slightly outlasts the 2.8s slot-fade-out animation in global.css. */
+const EXIT_MS = 2_900;
+const WORD_STAGGER_MS = 95;
 
 type Layer = {
   id: number;

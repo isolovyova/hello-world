@@ -1,7 +1,7 @@
 import type { BirthDataset, CountryBirthData } from './types';
 
 export type StoryHeadline = string | ((liveCount: number) => string);
-export type SoundCueKind = 'breath' | 'cry' | 'giggle';
+export type SoundCueKind = 'cry';
 
 export type StoryBeat = {
   id: string;
@@ -46,7 +46,7 @@ function formatExpectedBirthsPerMinute(country: CountryBirthData | undefined, se
 function countryFact(
   dataset: StoryDataset,
   iso3: (typeof COUNTRY_FACT_ISO3)[number],
-  soundCue?: SoundCueKind,
+  soundCue: SoundCueKind | undefined = undefined,
 ): StoryBeat {
   const country = getCountry(dataset.countries, iso3);
   const countryName = country?.name ?? iso3;
@@ -94,7 +94,7 @@ export function createStoryBeats(dataset: StoryDataset): StoryBeat[] {
       body: 'Different rooms. Different languages. One shared sky.',
       durationSeconds: STORY_BEAT_DURATION_SECONDS,
     },
-    countryFact(dataset, 'IND', 'giggle'),
+    countryFact(dataset, 'IND', 'cry'),
     {
       id: 'world-keeps-turning',
       eyebrow: 'The world keeps turning',
@@ -117,7 +117,7 @@ export function createStoryBeats(dataset: StoryDataset): StoryBeat[] {
       headline: 'The world is more than the news.',
       body: 'Joy can be quiet and still be real.',
       durationSeconds: STORY_BEAT_DURATION_SECONDS,
-      soundCue: 'giggle',
+      soundCue: 'cry',
     },
     countryFact(dataset, 'IDN'),
     {

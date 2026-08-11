@@ -17,10 +17,11 @@ import './styles/global.css';
 const dataset = birthDataset as BirthDataset;
 const MAX_ACTIVE_POINTS = 500;
 
-// The three lines land in sequence rather than all at once.
-const HEADLINE_DELAY_MS = 260;
-const SUBLINE_DELAY_MS = 900;
-const HEADLINE_WORD_DELAY_MS = 120;
+// The three lines land in sequence rather than all at once. The story cadence
+// stays at fifteen seconds; these delays only shape the quieter reveal.
+const HEADLINE_DELAY_MS = 620;
+const SUBLINE_DELAY_MS = 1_750;
+const HEADLINE_WORD_DELAY_MS = 360;
 
 function newEventId(): string {
   return globalThis.crypto?.randomUUID?.() ?? `${Date.now()}-${Math.random().toString(16).slice(2)}`;
@@ -67,6 +68,9 @@ export default function App() {
   const weightedCountries = useMemo(() => createWeightedCountries(dataset.countries), []);
   const soundscapeRef = useRef<SoundscapeControls | null>(null);
   const soundEnabledRef = useRef(false);
+  const soundRequestedRef = useRef(true);
+  const startupCuePlayedRef = useRef(false);
+  const unlockCleanupRef = useRef<(() => void) | null>(null);
   const storyBeatRef = useRef('0:one-minute-on-earth');
 
   const tickingStory = useMemo(() => getStoryBeat(elapsedSeconds, dataset), [elapsedSeconds]);
@@ -128,18 +132,71 @@ export default function App() {
   useEffect(() => {
     const soundscape = createSoundscape();
     soundscapeRef.current = soundscape;
+    let disposed = false;
+
+    const removeUnlockListeners = () => {
+      unlockCleanupRef.current?.();
+      unlockCleanupRef.current = null;
+    };
+
+    const attemptEnable = async (playStartupCue: boolean) => {
+      if (disposed || !soundRequestedRef.current) {
+        return;
+      }
+
+      try {
+        await soundscape.enable();
+      } catch {
+        // Sound is deliberately best-effort. The gesture listeners below give
+        // blocked autoplay another chance without interrupting the experience.
+      }
+
+      if (disposed || !soundRequestedRef.current) {
+        return;
+      }
+
+      if (soundscape.isEnabled()) {
+        setSoundEnabled(true);
+        removeUnlockListeners();
+        if (playStartupCue && !startupCuePlayedRef.current) {
+          soundscape.cue('cry');
+          startupCuePlayedRef.current = true;
+        }
+        return;
+      }
+
+      if (unlockCleanupRef.current) {
+        return;
+      }
+
+      const handleGesture = () => {
+        void attemptEnable(true);
+      };
+
+      window.addEventListener('pointerdown', handleGesture);
+      window.addEventListener('touchstart', handleGesture, { passive: true });
+      window.addEventListener('keydown', handleGesture);
+      unlockCleanupRef.current = () => {
+        window.removeEventListener('pointerdown', handleGesture);
+        window.removeEventListener('touchstart', handleGesture);
+        window.removeEventListener('keydown', handleGesture);
+      };
+    };
 
     const handleVisibilityChange = () => {
       if (document.visibilityState === 'hidden') {
         soundscape.pause();
-      } else if (soundscape.isEnabled()) {
-        void soundscape.enable().catch(() => undefined);
+      } else if (soundRequestedRef.current) {
+        void attemptEnable(false);
       }
     };
 
     document.addEventListener('visibilitychange', handleVisibilityChange);
+    void attemptEnable(true);
     return () => {
+      disposed = true;
       document.removeEventListener('visibilitychange', handleVisibilityChange);
+      removeUnlockListeners();
       soundscape.stop();
       soundscapeRef.current = null;
     };
@@ -167,11 +224,15 @@ export default function App() {
     }
 
     if (soundscape.isEnabled()) {
+      soundRequestedRef.current = false;
+      unlockCleanupRef.current?.();
+      unlockCleanupRef.current = null;
       soundscape.disable();
       setSoundEnabled(false);
       return;
     }
 
+    soundRequestedRef.current = true;
     try {
       await soundscape.enable();
     } catch {
@@ -180,8 +241,9 @@ export default function App() {
     }
     const enabled = soundscape.isEnabled();
     setSoundEnabled(enabled);
-    if (enabled && currentStory.beat.soundCue) {
-      soundscape.cue(currentStory.beat.soundCue);
+    if (enabled) {
+      soundscape.cue('cry');
+      startupCuePlayedRef.current = true;
     }
   };
 
@@ -234,8 +296,6 @@ export default function App() {
       <Methodology
         isOpen={methodologyOpen}
         onClose={() => setMethodologyOpen(false)}
-        worldBirths={dataset.worldBirths}
-        lambdaGlobal={dataset.lambdaGlobal}
       />
     </main>
   );
