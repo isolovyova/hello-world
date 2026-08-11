@@ -156,7 +156,7 @@ export default function App() {
 
     storyBeatRef.current = currentStory.instanceKey;
     if (soundEnabledRef.current && currentStory.beat.soundCue) {
-      soundscapeRef.current?.cueFirstBreath();
+      soundscapeRef.current?.cue(currentStory.beat.soundCue);
     }
   }, [currentStory]);
 
@@ -181,7 +181,7 @@ export default function App() {
     const enabled = soundscape.isEnabled();
     setSoundEnabled(enabled);
     if (enabled && currentStory.beat.soundCue) {
-      soundscape.cueFirstBreath();
+      soundscape.cue(currentStory.beat.soundCue);
     }
   };
 

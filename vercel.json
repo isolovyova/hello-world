@@ -1,0 +1,25 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "rewrites": [
+    {
+      "source": "/hello-world/assets/:path*",
+      "destination": "/assets/:path*"
+    },
+    {
+      "source": "/hello-world",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/hello-world/",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/hello-world/:path*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/:path*",
+      "destination": "https://solovyova.lovable.app/:path*"
+    }
+  ]
+}

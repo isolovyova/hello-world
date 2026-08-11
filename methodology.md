@@ -16,19 +16,19 @@ Birth events are generated progressively from an exponential inter-arrival distr
 
 Each simulated birth is assigned to a country in proportion to that country's projected number of births.
 
-**Location**
-
-Within each selected country with a bundled polygon, the location of the light is randomly generated inside that country's geographic boundaries. V0.1 assumes births are uniformly distributed across each country's land area. A small number of UN country/area records do not have a distinct polygon in the compact atlas; those use the UN location metadata centroid as a visual fallback.
-
-The lights do not represent identifiable people or actual reported births. Locations within countries are approximate and should not be interpreted as real birth locations.
-
 ## The story
 
 The full-screen story repeats intentionally while you stay. `Hello, World.` remains the permanent title while twelve short beats move through the lower part of the globe in a three-minute loop. There is no completion moment, frozen final count, reset, or terminal screen. Country story beats convert projected annual births into an expected average per minute; they are not live country reports. The philosophical lines are original writing, not attributed quotations.
 
 `About the numbers` is the methodology entry point from the experience. It explains the source, simulation, country weighting, and the limits of the visual metaphor.
 
-The sound is optional and off by default. When enabled, it is a quiet synthesized first-breath texture, not a recording of a particular child or a live birth. Dim background lights are decorative night-Earth texture; only the brighter birth lights affect the counter.
+The sound is optional and off by default. When enabled, sparse story beats can play abstract synthesized baby-cry and giggle cues, with a softer first-breath fallback. They are not recordings of a particular child or a live birth. Dim background lights are decorative night-Earth texture; only the brighter birth lights affect the counter.
+
+## Why I made this
+
+Nothing in the world feels more meaningful than the beginning of a new life. Nothing feels more enduring than the birth of a child.
+
+Hey! I'm Iryna Solovyova, a product builder who creates products for the sheer joy of building, this one included. Feel free to [say hi on LinkedIn](https://ca.linkedin.com/in/irynasolovyova) if you'd like to collaborate or share feedback.
 
 ## Data source and preparation
 

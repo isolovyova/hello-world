@@ -60,7 +60,11 @@ The app uses d3-geo and a canvas renderer for the smallest stable globe implemen
 
 The atlas does not expose a distinct polygon for every small UN country/area record. If a selected record has no bundled polygon, the placement function uses the UN location metadata centroid as a conservative visual fallback; it still makes no claim about an actual birth location.
 
-The illustrated night-Earth layer uses decorative static lights that are separate from simulated birth lights. Optional sound is generated locally with Web Audio after an explicit user action; no external audio file or recording is required.
+The illustrated night-Earth layer uses decorative static lights that are separate from simulated birth lights. Optional sound is generated locally with Web Audio after an explicit user action; sparse story beats can play abstract baby-cry and giggle cues, with no external audio file or recording.
+
+## Deployment
+
+The production branch is `main` in [`isolovyova/hello-world`](https://github.com/isolovyova/hello-world). Vercel deploys new commits automatically. The Vercel configuration serves this project at `/hello-world` and proxies the other domain paths to the existing Lovable site while the domain migration is incremental.
 
 ## Lifecycle, mobile, and accessibility
 
